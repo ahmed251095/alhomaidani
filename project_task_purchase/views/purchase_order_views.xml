@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id="purchase_order_form_inherit_task_link" model="ir.ui.view">
+        <field name="name">purchase.order.form.inherit.task.link</field>
+        <field name="model">purchase.order</field>
+        <field name="inherit_id" ref="purchase.purchase_order_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//sheet/notebook/page[1]/group" position="after">
+                <group string="Task Link">
+                    <field name="task_id" options="{'no_create_edit': True}" context="{'search_default_project_only': 1}"/>
+                    <field name="origin"/>
+                </group>
+            </xpath>
+        </field>
+    </record>
+</odoo>
