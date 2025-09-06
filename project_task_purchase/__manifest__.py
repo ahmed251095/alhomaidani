@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 {
     "name": "Project Task Purchase",
-    "version": "18.0.1.0.3",
+    "version": "18.0.1.0.4",
     "summary": "Create and track Purchase Orders directly from Project Tasks",
     "author": "Ahmed Salah",
     "depends": ["project", "purchase"],
