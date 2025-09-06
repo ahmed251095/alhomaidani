@@ -11,7 +11,7 @@
                     name="action_open_purchase_orders"
                     class="oe_stat_button"
                     icon="fa-shopping-cart"
-                    attrs="{'invisible': [('purchase_order_count', '=', 0)]}">
+                    invisible="purchase_order_count == 0">
                     <field name="purchase_order_count" widget="statinfo" string="Purchase Orders"/>
                 </button>
             </xpath>
