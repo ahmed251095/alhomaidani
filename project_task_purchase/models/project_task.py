@@ -5,19 +5,21 @@ class ProjectTask(models.Model):
     _inherit = "project.task"
 
     purchase_order_ids = fields.One2many(
-        "purchase.order", "task_id",
-        string="Purchase Orders"
+        "purchase.order", "task_id", string="Purchase Orders"
     )
     purchase_order_count = fields.Integer(
-        string="PO Count",
-        compute="_compute_purchase_order_count",
-        store=False,
+        string="PO Count", compute="_compute_purchase_order_count", store=False
     )
 
     @api.depends('purchase_order_ids')
     def _compute_purchase_order_count(self):
+        # efficient count using read_group
+        groups = self.env['purchase.order'].read_group(
+            [('task_id', 'in', self.ids)], ['task_id'], ['task_id']
+        )
+        count_map = {g['task_id'][0]: g['task_id_count'] for g in groups}
         for task in self:
-            task.purchase_order_count = len(task.purchase_order_ids)
+            task.purchase_order_count = count_map.get(task.id, 0)
 
     def action_create_purchase_order(self):
         self.ensure_one()

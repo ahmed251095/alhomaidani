@@ -8,6 +8,7 @@ class PurchaseOrder(models.Model):
         "project.task",
         string="Task",
         index=True,
+        ondelete="set null",
         help="The project task related to this Purchase Order.",
     )
 
