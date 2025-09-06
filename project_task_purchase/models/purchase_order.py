@@ -17,3 +17,18 @@ class PurchaseOrder(models.Model):
         for po in self:
             if po.task_id:
                 po.origin = po.task_id.display_name
+
+
+class PurchaseOrderProjectLink(models.Model):
+    _inherit = "purchase.order"
+
+    # Related project for compatibility with views that show project on POs
+    project_id = fields.Many2one(
+        "project.project",
+        string="Project",
+        related="task_id.project_id",
+        store=True,
+        readonly=True,
+        index=True,
+        help="Project of the related task (if any)."
+    )
