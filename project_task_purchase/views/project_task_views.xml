@@ -14,9 +14,6 @@
                     invisible="purchase_order_count == 0">
                     <field name="purchase_order_count" widget="statinfo" string="Purchase Orders"/>
                 </button>
-            </xpath>
-
-            <xpath expr="//header" position="inside">
                 <button
                     name="action_create_purchase_order"
                     type="object"
@@ -34,42 +31,7 @@
         <field name="arch" type="xml">
             <xpath expr="//notebook" position="inside">
                 <page string="Purchase Orders">
-                    <field name="purchase_order_ids" context="{'default_task_id': active_id}">
-                        <tree editable="bottom">
-                            <field name="name"/>
-                            <field name="partner_id"/>
-                            <field name="date_order"/>
-                            <field name="state"/>
-                            <field name="amount_total" widget="monetary"/>
-                            <field name="currency_id" invisible="1"/>
-                        </tree>
-                        <form>
-                            <sheet>
-                                <group>
-                                    <field name="name" readonly="1"/>
-                                    <field name="partner_id"/>
-                                    <field name="date_order"/>
-                                    <field name="state" readonly="1"/>
-                                    <field name="origin"/>
-                                    <field name="task_id" readonly="1"/>
-                                </group>
-                                <notebook>
-                                    <page string="Order Lines">
-                                        <field name="order_line">
-                                            <tree editable="bottom">
-                                                <field name="product_id"/>
-                                                <field name="name"/>
-                                                <field name="product_qty"/>
-                                                <field name="price_unit"/>
-                                                <field name="date_planned"/>
-                                                <field name="taxes_id"/>
-                                            </tree>
-                                        </field>
-                                    </page>
-                                </notebook>
-                            </sheet>
-                        </form>
-                    </field>
+                    <field name="purchase_order_ids" context="{'default_task_id': active_id}"/>
                 </page>
             </xpath>
         </field>
