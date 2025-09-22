@@ -2,7 +2,7 @@
 {
     "name": "Sale: Quotation Multi-Stage Approval (L1/L2 + Reject)",
     "summary": "Salesman submits; Level1 approves then Level2 approves; reject with reason; block confirm until fully approved.",
-    "version": "18.0.2.0.0",
+    "version": "18.0.2.1",
     "author": "ChatGPT",
     "depends": ["sale_management", "mail"],
     "data": [
