@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Inherit the Sale Order form and restrict the partner_id domain to customers only -->
+    <record id="view_order_form_customer_filter" model="ir.ui.view">
+        <field name="name">sale.order.form.customer.filter</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_form"/>
+        <field name="arch" type="xml">
+            <field name="partner_id" position="attributes">
+                <attribute name="domain">[('customer_rank','&gt;',0)]</attribute>
+            </field>
+        </field>
+    </record>
+</odoo>
