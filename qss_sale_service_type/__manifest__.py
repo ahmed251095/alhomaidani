@@ -2,7 +2,7 @@
 {
     'name': 'Sale Product/Service Type',
     'summary': "Adds a 'نوع المنتجات والخدمات' field to Sale Orders with per-company types and a Sales settings menu to manage them.",
-    'version': '18.0.1.0.3',
+    'version': '18.0.1.0.4',
     'category': 'Sales/Sales',
     'author': 'ChatGPT (for Ahmed Salah)',
     'license': 'LGPL-3',
