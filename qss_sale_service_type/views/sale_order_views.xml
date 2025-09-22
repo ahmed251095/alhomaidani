@@ -6,8 +6,10 @@
         <field name="model">sale.order</field>
         <field name="inherit_id" ref="sale.view_order_form"/>
         <field name="arch" type="xml">
-            <xpath expr="//sheet//group[@name='sale_order_general']" position="inside">
+            <!-- Place after customer field to avoid missing-named group crashes across versions -->
+            <xpath expr="//field[@name='partner_id']" position="after">
                 <field name="service_type_id"
+                       string="نوع المنتجات والخدمات"
                        placeholder="اختر نوع المنتجات والخدمات"
                        options="{'no_create_edit': False}"
                        domain="['|', ('company_id', '=', False), ('company_id', '=', company_id)]"/>
