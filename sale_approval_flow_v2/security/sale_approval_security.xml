@@ -1,0 +1,13 @@
+<odoo>
+    <!-- Level 1 approvers -->
+    <record id="group_sale_approve_level1" model="res.groups">
+        <field name="name">Approve Quotation (Level 1)</field>
+        <field name="category_id" ref="base.module_category_sales_management"/>
+    </record>
+    <!-- Level 2 approvers -->
+    <record id="group_sale_approve_level2" model="res.groups">
+        <field name="name">Approve Quotation (Level 2)</field>
+        <field name="category_id" ref="base.module_category_sales_management"/>
+        <field name="implied_ids" eval="[(4, ref('group_sale_approve_level1'))]"/>
+    </record>
+</odoo>

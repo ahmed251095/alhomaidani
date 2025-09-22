@@ -1,0 +1,54 @@
+<odoo>
+    <data>
+        <record id="view_order_form_inherit_approval" model="ir.ui.view">
+            <field name="name">sale.order.form.approval.flow.v2</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.view_order_form"/>
+            <field name="arch" type="xml">
+                <!-- Header buttons -->
+                <xpath expr="//header" position="inside">
+                    <button name="action_submit_for_approval"
+                            string="Submit for Approval"
+                            type="object"
+                            attrs="{'invisible': ['|', ('state','not in',['draft','sent']), ('approval_state','not in',['draft','rejected'])]}"/>
+                    <button name="action_approve_level1"
+                            string="Approve (L1)"
+                            type="object"
+                            class="btn-primary"
+                            groups="sale_approval_flow_v2.group_sale_approve_level1"
+                            attrs="{'invisible': ['|', ('state','not in',['draft','sent']), ('approval_state','!=','waiting')]}"/>
+                    <button name="action_approve_level2"
+                            string="Approve (L2)"
+                            type="object"
+                            class="btn-primary"
+                            groups="sale_approval_flow_v2.group_sale_approve_level2"
+                            attrs="{'invisible': ['|', ('state','not in',['draft','sent']), ('approval_state','!=','level1')]}"/>
+                    <button name="action_reject_open_wizard"
+                            string="Reject"
+                            type="object"
+                            class="btn-secondary"
+                            groups="sale_approval_flow_v2.group_sale_approve_level1,sale_approval_flow_v2.group_sale_approve_level2"
+                            attrs="{'invisible': ['|', ('state','not in',['draft','sent']), ('approval_state','not in',['waiting','level1'])]}"/>
+                </xpath>
+
+                <!-- Show approval state + details -->
+                <xpath expr="//page[@name='other_info']" position="inside">
+                    <group string="Approval">
+                        <field name="approval_state" readonly="1"/>
+                        <field name="approver1_id" readonly="1"/>
+                        <field name="approver1_date" readonly="1"/>
+                        <field name="approver2_id" readonly="1"/>
+                        <field name="approver2_date" readonly="1"/>
+                        <field name="approval_note"/>
+                        <field name="rejection_reason" readonly="1" attrs="{'invisible':[('approval_state','!=','rejected')]}"/>
+                    </group>
+                </xpath>
+
+                <!-- Gate confirm button -->
+                <xpath expr="//button[@name='action_confirm']" position="attributes">
+                    <attribute name="attrs">{'invisible': ['|', ('state','not in',['draft','sent']), ('approval_state','!=','approved')]}</attribute>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>
