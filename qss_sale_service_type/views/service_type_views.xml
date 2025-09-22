@@ -41,9 +41,4 @@
     </record>
 
     <!-- Put it under Sales ▸ Configuration -->
-    <menuitem id="menu_service_type_root"
-              name="أنواع المنتجات والخدمات"
-              parent="base.menu_config"
-              action="action_service_type"
-              sequence="45"/>
 </odoo>
