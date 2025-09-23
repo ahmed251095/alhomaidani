@@ -47,6 +47,10 @@
             </group>
           </page>
         </xpath>
+      <xpath expr="//button[@name='action_create_invoice']" position="attributes"><attribute name="invisible">not (state in ['sale'] and approval_state == 'approved')</attribute></xpath>
+
+      <xpath expr="//button[@name='action_view_invoice']" position="attributes"><attribute name="invisible">not (state in ['sale'] and approval_state == 'approved')</attribute></xpath>
+
       </field>
     </record>
 
@@ -66,7 +70,11 @@
                     <button string="Cancel" class="btn-secondary" special="cancel"/>
                 </footer>
             </form>
-        </field>
+        <xpath expr="//button[@name='action_create_invoice']" position="attributes"><attribute name="invisible">not (state in ['sale'] and approval_state == 'approved')</attribute></xpath>
+
+      <xpath expr="//button[@name='action_view_invoice']" position="attributes"><attribute name="invisible">not (state in ['sale'] and approval_state == 'approved')</attribute></xpath>
+
+      </field>
     </record>
   </data>
 </odoo>
