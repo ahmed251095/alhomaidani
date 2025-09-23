@@ -42,7 +42,7 @@
                 <field name="approver2_id" readonly="1"/>
                 <field name="approver2_date" readonly="1"/>
                 <field name="approval_note"/>
-                <field name="rejection_reason" readonly="1" attrs="{'invisible':[('approval_state','!=','rejected')]}"/>
+                <field name="rejection_reason" readonly="1" invisible="approval_state != 'rejected'"/>
             </group>
         </page>
     </xpath>
