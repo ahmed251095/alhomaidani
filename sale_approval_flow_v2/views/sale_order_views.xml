@@ -10,25 +10,25 @@
                     <button name="action_submit_for_approval"
                             string="Submit for Approval"
                             type="object"
-                            attrs="{'invisible': ['|', ('state','not in',['draft','sent']), ('approval_state','not in',['draft','rejected'])]}"/>
+                           / invisible="not (state in ['draft','sent'] and approval_state in ['draft','rejected'])">
                     <button name="action_approve_level1"
                             string="Approve (L1)"
                             type="object"
                             class="btn-primary"
                             groups="sale_approval_flow_v2.group_sale_approve_level1"
-                            attrs="{'invisible': ['|', ('state','not in',['draft','sent']), ('approval_state','!=','waiting')]}"/>
+                           / invisible="not (state in ['draft','sent'] and approval_state == 'waiting')">
                     <button name="action_approve_level2"
                             string="Approve (L2)"
                             type="object"
                             class="btn-primary"
                             groups="sale_approval_flow_v2.group_sale_approve_level2"
-                            attrs="{'invisible': ['|', ('state','not in',['draft','sent']), ('approval_state','!=','level1')]}"/>
+                           / invisible="not (state in ['draft','sent'] and approval_state == 'level1')">
                     <button name="action_reject_open_wizard"
                             string="Reject"
                             type="object"
                             class="btn-secondary"
                             groups="sale_approval_flow_v2.group_sale_approve_level1,sale_approval_flow_v2.group_sale_approve_level2"
-                            attrs="{'invisible': ['|', ('state','not in',['draft','sent']), ('approval_state','not in',['waiting','level1'])]}"/>
+                           / invisible="not (state in ['draft','sent'] and approval_state in ['waiting','level1'])">
                 </xpath>
 
                 <!-- Show approval state + details -->
@@ -49,9 +49,7 @@
 
 
                 <!-- Gate confirm button -->
-                <xpath expr="//button[@name='action_confirm']" position="attributes">
-                    <attribute name="attrs">{'invisible': ['|', ('state','not in',['draft','sent']), ('approval_state','!=','approved')]}</attribute>
-                </xpath>
+                <xpath expr="//button[@name='action_confirm']" position="attributes"><attribute name="invisible">not (state in ['draft','sent'] and approval_state == 'approved')</attribute></xpath>
             </field>
         </record>
     </data>
