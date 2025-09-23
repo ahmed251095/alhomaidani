@@ -38,11 +38,9 @@ class SaleOrder(models.Model):
                         "note": _("Please review and approve quotation %s.") % (order.name or _("(New)")),
                     })
             if partner_ids:
-                order.message_post(
-                    body=_("Approval requested for quotation."),
-                    partner_ids=partner_ids,
-                    subtype_xmlid="mail.mt_comment",
-                )
+                order.message_post(body=_("Approval requested for quotation."),
+                                   partner_ids=partner_ids,
+                                   subtype_xmlid="mail.mt_comment")
 
     def action_submit_for_approval(self):
         for order in self:
@@ -56,24 +54,14 @@ class SaleOrder(models.Model):
         self.ensure_one()
         if self.approval_state != 'waiting':
             raise ValidationError(_("Quotation must be in 'Waiting L1 Approval'."))
-        # Decide if L2 is needed based on settings and threshold
-        two_stage = self.env['ir.config_parameter'].sudo().get_param('sale_approval_flow.two_stage', 'True') == 'True'
-        try:
-            l2_threshold = float(self.env['ir.config_parameter'].sudo().get_param('sale_approval_flow.l2_min_total', '0') or 0)
-        except Exception:
-            l2_threshold = 0.0
-        need_l2 = two_stage and (self.amount_total >= l2_threshold)
         self.write({
             'approver1_id': self.env.user.id,
             'approver1_date': fields.Datetime.now(),
             'rejection_reason': False,
-            'approval_state': 'level1' if need_l2 else 'approved',
+            'approval_state': 'level1',
         })
-        if need_l2:
-            self.message_post(body=_('Approved by Level 1: %s. Waiting Level 2.') % self.env.user.display_name)
-            self._notify_group('sale_approval_flow_v2.group_sale_approve_level2')
-        else:
-            self.message_post(body=_('Approved by Level 1: %s. L2 skipped by settings.') % self.env.user.display_name)
+        self.message_post(body=_("Approved by Level 1: %s.") % self.env.user.display_name)
+        self._notify_group("sale_approval_flow_v2.group_sale_approve_level2")
         return True
 
     def action_approve_level2(self):
@@ -103,16 +91,5 @@ class SaleOrder(models.Model):
     def action_confirm(self):
         for order in self:
             if order.approval_state != "approved":
-                raise ValidationError(_("You cannot confirm this quotation until Level 2 approval is completed."))
+                raise ValidationError(_("You cannot confirm this quotation until approval is completed."))
         return super().action_confirm()
-
-
-from odoo import models, fields, api, _
-
-class ResConfigSettings(models.TransientModel):
-    _inherit = "res.config.settings"
-
-    approval_two_stage = fields.Boolean(string="Enable Two-Stage Approval", config_parameter="sale_approval_flow.two_stage", default=True)
-    approval_l2_threshold = fields.Monetary(string="L2 Min Total", config_parameter="sale_approval_flow.l2_min_total", default=0.0, currency_field='currency_id')
-    currency_id = fields.Many2one('res.currency', string='Currency', default=lambda self: self.env.company.currency_id)
-
