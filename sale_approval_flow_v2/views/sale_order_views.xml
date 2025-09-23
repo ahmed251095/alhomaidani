@@ -5,20 +5,19 @@
       <field name="model">sale.order</field>
       <field name="inherit_id" ref="sale.view_order_form"/>
       <field name="arch" type="xml">
-
         <xpath expr="//header" position="inside">
           <button name="action_submit_for_approval"
                   string="Submit for Approval"
                   type="object"
                   invisible="not (state in ['draft','sent'] and approval_state in ['draft','rejected'])"/>
           <button name="action_approve_level1"
-                  string="Approve (L1)"
+                  string="موافقة إصدار عرض السعر"
                   type="object"
                   class="btn-primary"
                   groups="sale_approval_flow_v2.group_sale_approve_level1"
                   invisible="not (state in ['draft','sent'] and approval_state == 'waiting')"/>
           <button name="action_approve_level2"
-                  string="Approve (L2)"
+                  string="موافقة التحويل إلى مشروع"
                   type="object"
                   class="btn-primary"
                   groups="sale_approval_flow_v2.group_sale_approve_level2"
@@ -48,11 +47,9 @@
             </group>
           </page>
         </xpath>
-
       </field>
     </record>
 
-    <!-- Reject wizard view -->
     <record id="view_sale_approval_reject_wizard" model="ir.ui.view">
         <field name="name">sale.approval.reject.wizard.form</field>
         <field name="model">sale.approval.reject.wizard</field>
@@ -61,7 +58,7 @@
                 <sheet>
                     <group>
                         <field name="sale_id" invisible="1"/>
-                        <field name="reason" placeholder="Write the rejection reason..." required="1"/>
+                        <field name="reason" placeholder="أكتب سبب الرفض..." required="1"/>
                     </group>
                 </sheet>
                 <footer>
@@ -71,6 +68,5 @@
             </form>
         </field>
     </record>
-
   </data>
 </odoo>

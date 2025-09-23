@@ -38,7 +38,7 @@ class SaleOrder(models.Model):
                         "note": _("Please review and approve quotation %s.") % (order.name or _("(New)")),
                     })
             if partner_ids:
-                order.message_post(body=_("Approval requested for quotation."),
+                order.message_post(body=_("تم إرسال طلب اعتماد لعرض السعر."),
                                    partner_ids=partner_ids,
                                    subtype_xmlid="mail.mt_comment")
 
@@ -60,7 +60,7 @@ class SaleOrder(models.Model):
             'rejection_reason': False,
             'approval_state': 'level1',
         })
-        self.message_post(body=_("Approved by Level 1: %s.") % self.env.user.display_name)
+        self.message_post(body=_("تمت موافقة إصدار عرض السعر بواسطة: %s.") % self.env.user.display_name)
         self._notify_group("sale_approval_flow_v2.group_sale_approve_level2")
         return True
 
@@ -73,7 +73,7 @@ class SaleOrder(models.Model):
             "approver2_id": self.env.user.id,
             "approver2_date": fields.Datetime.now(),
         })
-        self.message_post(body=_("Approved by Level 2: %s.") % self.env.user.display_name)
+        self.message_post(body=_("تمت موافقة التحويل إلى مشروع بواسطة: %s.") % self.env.user.display_name)
         return True
 
     def action_reject_open_wizard(self):
@@ -91,5 +91,5 @@ class SaleOrder(models.Model):
     def action_confirm(self):
         for order in self:
             if order.approval_state != "approved":
-                raise ValidationError(_("You cannot confirm this quotation until approval is completed."))
+                raise ValidationError(_("لا يمكنك تأكيد هذا العرض قبل الاعتماد النهائي."))
         return super().action_confirm()

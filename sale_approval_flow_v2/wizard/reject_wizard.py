@@ -15,5 +15,5 @@ class SaleApprovalRejectWizard(models.TransientModel):
             "approval_state":"rejected",
             "rejection_reason": self.reason,
         })
-        sale.message_post(body=_("Quotation rejected by %s.<br/>Reason: %s") % (self.env.user.display_name, self.reason))
+        sale.message_post(body=_("تم رفض عرض السعر بواسطة %s.<br/>السبب: %s") % (self.env.user.display_name, self.reason))
         return {"type":"ir.actions.act_window_close"}
