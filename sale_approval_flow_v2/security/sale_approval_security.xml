@@ -1,5 +1,5 @@
 <odoo>
-    <record id="module_category_sales_approval" model="res.groups.category">
+    <record id="module_category_sales_approval" model="ir.module.category">
         <field name="name">Sales Approval</field>
         <field name="sequence">20</field>
     </record>
