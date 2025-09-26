@@ -95,3 +95,17 @@ class SaleOrder(models.Model):
             if order.approval_state != "approved":
                 raise ValidationError(_("لا يمكنك تأكيد هذا العرض قبل الاعتماد النهائي."))
         return super().action_confirm()
+
+# --- Guards for invoicing visibility/logic (server-side) ---
+def _check_invoice_allowed(self):
+    for order in self:
+        if order.approval_state != 'approved' or order.state != 'sale':
+            raise ValidationError(_("لا يمكنك إنشاء/عرض الفواتير قبل اعتماد المرحلة الثانية وتأكيد أمر البيع."))
+
+def action_create_invoice(self):
+    self._check_invoice_allowed()
+    return super().action_create_invoice()
+
+def action_view_invoice(self):
+    self._check_invoice_allowed()
+    return super().action_view_invoice()
