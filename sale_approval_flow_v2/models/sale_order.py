@@ -25,20 +25,22 @@ class SaleOrder(models.Model):
             return
         activity_type = self.env.ref("mail.mail_activity_data_todo", raise_if_not_found=False)
         for order in self:
-            partner_ids = []
-            for user in group.users:
-                partner_ids.append(user.partner_id.id)
+            link = f"/web#id={order.id}&model=sale.order&view_type=form"
+            subject = _("طلب اعتماد عرض السعر: %s") % (order.name or _("(New)"))
+            approver_users = group.users.filtered(lambda u: order.company_id in u.company_ids)
+            for user in approver_users:
                 if activity_type:
                     self.env["mail.activity"].sudo().create({
                         "activity_type_id": activity_type.id,
                         "res_model_id": self.env["ir.model"]._get_id("sale.order"),
                         "res_id": order.id,
                         "user_id": user.id,
-                        "summary": _("Approve quotation"),
-                        "note": _("Please review and approve quotation %s.") % (order.name or _("(New)")),
+                        "summary": subject,
+                        "note": _("<p>الرجاء مراجعة واعتماد عرض السعر <b>%s</b>.</p><p><a href='%s'>فتح عرض السعر</a></p>") % (order.name or _("(New)"), link),
                     })
+            partner_ids = approver_users.mapped("partner_id").ids
             if partner_ids:
-                order.message_post(body=_("تم إرسال طلب اعتماد لعرض السعر."),
+                order.message_post(body=_("تم إرسال طلب اعتماد لعرض السعر <b>%s</b> — <a href='%s'>فتح عرض السعر</a>.") % (order.name or _("(New)"), link),
                                    partner_ids=partner_ids,
                                    subtype_xmlid="mail.mt_comment")
 

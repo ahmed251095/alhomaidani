@@ -34,6 +34,14 @@
           <attribute name="invisible">not (state in ['draft','sent'] and approval_state == 'approved')</attribute>
         </xpath>
 
+        <!-- Hide Create/Invoices until order is confirmed and fully approved -->
+        <xpath expr="//button[@name='action_create_invoice']" position="attributes">
+          <attribute name="invisible">not (state in ['sale'] and approval_state == 'approved')</attribute>
+        </xpath>
+        <xpath expr="//button[@name='action_view_invoice']" position="attributes">
+          <attribute name="invisible">not (state in ['sale'] and approval_state == 'approved')</attribute>
+        </xpath>
+
         <xpath expr="//sheet/notebook" position="inside">
           <page string="Approval">
             <group>
@@ -47,10 +55,6 @@
             </group>
           </page>
         </xpath>
-      <xpath expr="//button[@name='action_create_invoice']" position="attributes"><attribute name="invisible">not (state in ['sale'] and approval_state == 'approved')</attribute></xpath>
-
-      <xpath expr="//button[@name='action_view_invoice']" position="attributes"><attribute name="invisible">not (state in ['sale'] and approval_state == 'approved')</attribute></xpath>
-
       </field>
     </record>
 
@@ -70,11 +74,7 @@
                     <button string="Cancel" class="btn-secondary" special="cancel"/>
                 </footer>
             </form>
-        <xpath expr="//button[@name='action_create_invoice']" position="attributes"><attribute name="invisible">not (state in ['sale'] and approval_state == 'approved')</attribute></xpath>
-
-      <xpath expr="//button[@name='action_view_invoice']" position="attributes"><attribute name="invisible">not (state in ['sale'] and approval_state == 'approved')</attribute></xpath>
-
-      </field>
+        </field>
     </record>
   </data>
 </odoo>
