@@ -61,7 +61,35 @@
                             </div>
                             <div>
                                 <!-- Render the HTML field from the Custom Report tab -->
-                                <span t-field="doc.report_field"/>
+                                
+<style type="text/css">
+/* Basic reset */
+#custom-content * { box-sizing: border-box; }
+#custom-content { direction: rtl; font-family: 'DejaVu Sans', 'Arial', sans-serif; font-size: 12px; line-height: 1.6; }
+#custom-content h1, #custom-content h2, #custom-content h3, 
+#custom-content h4, #custom-content h5, #custom-content h6 { margin: 8px 0 6px; font-weight: 600; }
+#custom-content p { margin: 0 0 8px; }
+#custom-content ul, #custom-content ol { margin: 6px 18px 8px 0; padding: 0 18px 0 0; }
+#custom-content img { max-width: 100%; height: auto; }
+
+/* Table styling to match the web editor look */
+#custom-content table { width: 100%; border-collapse: collapse; margin: 8px 0; table-layout: auto; }
+#custom-content th, #custom-content td { border: 1px solid #999; padding: 6px 8px; vertical-align: middle; }
+#custom-content th { font-weight: 600; }
+#custom-content td { text-align: center; }
+
+/* Prevent header/footer overlap */
+.page { position: relative; }
+.page:before { content: ""; position: absolute; inset: 0; background-image: url("/custom_so_report/static/src/img/letterhead.jpg"); background-repeat: no-repeat; background-position: center top; background-size: cover; opacity: 0.12; z-index: 0; }
+.page .oe_structure, .page #content-wrapper, .page #custom-content { position: relative; z-index: 1; }
+#custom-content { margin: 100px 50px 120px 50px; }
+
+/* Page breaks for long tables */
+#custom-content table { page-break-inside: auto; }
+#custom-content tr { page-break-inside: avoid; page-break-after: auto; }
+</style>
+
+<div id="custom-content"><t t-raw="doc.report_field or ''"/></div>
                             </div>
                         </div>
                     </div>
