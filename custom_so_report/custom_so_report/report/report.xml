@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Report Action -->
+    <record id="action_saleorder_custom_raw" model="ir.actions.report">
+        <field name="name">Custom Quotation</field>
+        <field name="model">sale.order</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">custom_so_report.report_saleorder_custom</field>
+        <field name="report_file">custom_so_report.report_saleorder_custom</field>
+        <field name="print_report_name">(object.state in ('draft','sent')) and ('Quotation - %s' % (object.name)) or ('Order - %s' % (object.name))</field>
+        <field name="binding_model_id" ref="sale.model_sale_order"/>
+        <field name="binding_type">report</field>
+    </record>
+
+    <!-- Main Template -->
+    <template id="report_saleorder_custom">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="doc">
+                <t t-set="o" t-value="doc"/>
+                <t t-call="web.external_layout">
+                    <!-- Background CSS -->
+                    <t t-set="bg_url" t-value="'/custom_so_report/static/src/img/letterhead.jpg'"/>
+                    <style type="text/css">
+                        /* make page background image with light opacity */
+                        .page {
+                            position: relative;
+                        }
+                        .page:before {
+                            content: "";
+                            position: absolute;
+                            inset: 0;
+                            background-image: url("<t t-esc='bg_url'/>");
+                            background-repeat: no-repeat;
+                            background-position: center top;
+                            background-size: cover;
+                            opacity: 0.12;
+                            z-index: 0;
+                        }
+                        .page .oe_structure, .page #content-wrapper, .page #custom-content {
+                            position: relative;
+                            z-index: 1;
+                        }
+                        /* add some inner margins to avoid header/footer overlap */
+                        #custom-content {
+                            margin: 100px 50px 120px 50px;
+                            font-size: 12px;
+                            line-height: 1.5;
+                        }
+                        .custom-title {
+                            font-weight: bold;
+                            font-size: 16px;
+                            margin-bottom: 10px;
+                        }
+                    </style>
+
+                    <!-- Content -->
+                    <div class="page">
+                        <div id="custom-content">
+                            <div class="custom-title">
+                                <t t-esc="(doc.state in ('draft','sent')) and 'Quotation' or 'Sales Order'"/>: <span t-field="doc.name"/>
+                            </div>
+                            <div>
+                                <!-- Render the HTML field from the Custom Report tab -->
+                                <span t-field="doc.report_field"/>
+                            </div>
+                        </div>
+                    </div>
+                </t>
+            </t>
+        </t>
+    </template>
+</odoo>
