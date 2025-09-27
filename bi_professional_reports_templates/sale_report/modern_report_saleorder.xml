@@ -72,7 +72,7 @@
           <br/>
 
           <!-- الإجماليات -->
-          <div name="total" class="float-start" style="direction: rtl; text-align: right; width: 260px;">
+          <div name="total" class="float-start" style="direction: rtl; text-align: right; width: 350px;">
             <table class="table table-condensed table-borderless">
               <tr class="border-black">
                 <td><strong>الإجمالى قبل الضريبة</strong></td>
