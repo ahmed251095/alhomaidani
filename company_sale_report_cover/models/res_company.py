@@ -17,3 +17,5 @@ class ResCompany(models.Model):
         ("scale-down", "Scale down"),
     ], string="Cover Object-Fit", default="cover",
        help="How the image scales inside the page area when used in the report cover.")
+
+    sale_report_cover_filename = fields.Char(string="Cover Filename")

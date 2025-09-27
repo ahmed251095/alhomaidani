@@ -9,7 +9,8 @@
     "license": "LGPL-3",
     "depends": ["base", "sale"],
     "data": [
-        "views/res_company_view.xml"
+        "views/res_company_view.xml",
+        "views/company_cover_snippet.xml"
     ],
     "assets": {},
     "installable": True,
