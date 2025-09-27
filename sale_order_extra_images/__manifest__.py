@@ -8,7 +8,6 @@
     'depends': ['sale', 'bi_professional_reports_templates'],
     'data': [
         'views/sale_order_views.xml',
-        'views/fix_remove_tcall.xml',
         'views/report_inherit.xml',
         'security/ir.model.access.csv',
     ],
