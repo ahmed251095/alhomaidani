@@ -67,7 +67,7 @@
                                 </t>
                                 <th width="30px"
                                     t-attf-style="background-color:#{company.color_sale}; !important; color:#{company.text_color_sale}; !important;text-align: right; ">
-                                    Invoicing and shipping address
+                                    نوع المنتجات والخدمات
                                 </th>
                             </tr>
                         </thead>
@@ -112,32 +112,10 @@
                                     </strong>
                                 </td>
                                 <td t-attf-style="text-align: right;">
-                                    <div t-field="doc.partner_invoice_id"/>
                                     <t t-if="doc.partner_invoice_id.street">
-                                        <t t-esc="doc.partner_invoice_id.street"/>
+                                        <t t-esc="doc.service_type_id"/>
                                     </t>
                                     <br/>
-                                    <t t-if="doc.partner_invoice_id.street2">
-                                        <t t-esc="doc.partner_invoice_id.street2"/>
-                                        <br/>
-                                    </t>
-
-                                    <t t-if="doc.partner_invoice_id.city">
-                                        <t t-esc="doc.partner_invoice_id.city"/>
-                                    </t>
-                                    <t t-if="doc.partner_invoice_id.state_id">
-                                        <t t-esc="doc.partner_invoice_id.state_id.name"/>
-                                    </t>
-                                    <br/>
-                                    <t t-if="doc.partner_invoice_id.country_id">
-                                        <t t-esc="doc.partner_invoice_id.country_id.name"/>
-                                    </t>
-                                    <br/>
-                                    <t t-if="doc.partner_invoice_id.zip">
-                                        <t t-esc="doc.partner_invoice_id.zip"/>
-                                    </t>
-                                    <br/>
-                                    <div t-field="doc.partner_invoice_id.vat"/>
                                 </td>
 
                             </tr>
