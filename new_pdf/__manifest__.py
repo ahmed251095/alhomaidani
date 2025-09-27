@@ -1,7 +1,7 @@
 {
     "name": "Sale Quotation Ultra",
-    "summary": "Premium, compact, Arabic-friendly quotation print for Odoo 18 (no empty gaps, stunning header, clean totals).",
-    "version": "18.0.1.0",
+    "summary": "Premium quotation print for Odoo 18 – safer XPaths (insert-only), Arabic-friendly, zero dead space.",
+    "version": "18.0.1.1",
     "category": "Sales",
     "author": "ChatGPT",
     "depends": ["sale_management"],
@@ -14,7 +14,5 @@
             "sale_quotation_ultra/static/src/scss/ultra.scss"
         ]
     },
-    "license": "LGPL-3",
-    "installable": True,
-    "application": False
+    "license": "LGPL-3"
 }
