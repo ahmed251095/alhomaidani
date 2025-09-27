@@ -17,19 +17,19 @@
             <thead>
               <tr>
                 <th width="20px"
-                    t-attf-style="background-color: #{company.color_sale or 'transparent'} !important; color: #{company.text_color_sale or '#000'} !important; text-align: left;">
+                    t-attf-style="background-color: #{company.color_sale or 'transparent'} !important; color: #{company.text_color_sale or '#000'} !important; text-align: center;">
                   العميل
                 </th>
                 <th width="20px"
-                    t-attf-style="background-color: #{company.color_sale or 'transparent'} !important; color: #{company.text_color_sale or '#000'} !important;">
+                    t-attf-style="background-color: #{company.color_sale or 'transparent'} !important; color: #{company.text_color_sale or '#000'} !important;text-align: center;">
                   تاريخ العرض
                 </th>
                 <th width="20px"
-                    t-attf-style="background-color: #{company.color_sale or 'transparent'} !important; color: #{company.text_color_sale or '#000'} !important;">
+                    t-attf-style="background-color: #{company.color_sale or 'transparent'} !important; color: #{company.text_color_sale or '#000'} !important;text-align: center;">
                   رقم العرض
                 </th>
                 <th width="40px"
-                    t-attf-style="background-color: #{company.color_sale or 'transparent'} !important; color: #{company.text_color_sale or '#000'} !important; text-align: right;">
+                    t-attf-style="background-color: #{company.color_sale or 'transparent'} !important; color: #{company.text_color_sale or '#000'} !important;text-align: center;">
                   نوع المنتجات والخدمات
                 </th>
               </tr>
@@ -52,27 +52,27 @@
             <thead>
               <tr>
                 <th t-attf-style="background-color: #{company.color_sale or 'transparent'} !important; color: #{company.text_color_sale or '#000'} !important;">
-                  Description
+                  الوصف
                 </th>
                 <th class="text-right"
                     t-attf-style="background-color: #{company.color_sale or 'transparent'} !important; color: #{company.text_color_sale or '#000'} !important;">
-                  Quantity
+                  الكمية
                 </th>
                 <th class="text-right"
                     t-attf-style="background-color: #{company.color_sale or 'transparent'} !important; color: #{company.text_color_sale or '#000'} !important;">
-                  Unit Price
+                  السعر
                 </th>
                 <th t-if="display_discount" class="text-right" groups="sale.group_discount_per_so_line"
                     t-attf-style="background-color: #{company.color_sale or 'transparent'} !important; color: #{company.text_color_sale or '#000'} !important;">
-                  Disc.(%)
+                  الخصم
                 </th>
                 <th class="text-right"
                     t-attf-style="background-color: #{company.color_sale or 'transparent'} !important; color: #{company.text_color_sale or '#000'} !important;">
-                  Taxes
+                  الضريبة
                 </th>
                 <th class="text-right"
                     t-attf-style="background-color: #{company.color_sale or 'transparent'} !important; color: #{company.text_color_sale or '#000'} !important;">
-                  Price
+                  الاجمالى
                 </th>
               </tr>
             </thead>
@@ -100,16 +100,16 @@
             <div class="col-4 pull-right" style="width: 260px;">
               <table class="table table-condensed table-borderless">
                 <tr class="border-black">
-                  <td><strong>Total Without Taxes</strong></td>
+                  <td><strong>الاجمالى قبل الضريبة</strong></td>
                   <td class="text-right"><span t-field="doc.amount_untaxed"/></td>
                 </tr>
                 <tr>
-                  <td>Taxes</td>
+                  <td>الضريبة</td>
                   <td class="text-right"><span t-field="doc.amount_tax"/></td>
                 </tr>
                 <tr class="border-black">
                   <td t-attf-style="background-color: #{company.color_sale or 'transparent'} !important; color: #{company.text_color_sale or '#000'} !important;">
-                    <strong>Total</strong>
+                    <strong>الاجمالى بعد الضريبة</strong>
                   </td>
                   <td class="text-right"
                       t-attf-style="background-color: #{company.color_sale or 'transparent'} !important; color: #{company.text_color_sale or '#000'} !important;">
