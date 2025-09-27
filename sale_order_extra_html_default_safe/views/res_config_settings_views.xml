@@ -1,0 +1,31 @@
+
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+  <data>
+    <record id="view_res_config_settings_sale_extra_html" model="ir.ui.view">
+      <field name="name">res.config.settings.sale.extra.html.safe</field>
+      <!-- Inherit the generic settings form so xpath is stable across editions -->
+      <field name="model">res.config.settings</field>
+      <field name="inherit_id" ref="base.res_config_settings_view_form"/>
+      <field name="arch" type="xml">
+        <!-- Insert our setting block near the top inside the first settings container -->
+        <xpath expr="//div[hasclass('o_setting_container')][1]" position="inside">
+          <div class="o_setting_box" id="so_extra_html_block">
+            <div class="o_setting_left_pane">
+              <span class="fa fa-file-text-o" role="img" aria-label="HTML"/>
+            </div>
+            <div class="o_setting_right_pane">
+              <label for="sale_extra_default_html"/>
+              <div class="text-muted">
+                Default HTML that will be copied to new Sale Orders (field “Extra Print HTML”).
+              </div>
+              <div class="content-group">
+                <field name="sale_extra_default_html" nolabel="1" placeholder="Paste default HTML here..."/>
+              </div>
+            </div>
+          </div>
+        </xpath>
+      </field>
+    </record>
+  </data>
+</odoo>
