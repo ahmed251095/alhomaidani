@@ -25,18 +25,18 @@
           <table class="table table-sm table-borderless" style="table-layout:fixed; direction: rtl; text-align: right;">
             <thead>
               <tr>
-                <th width="20%" t-attf-style="background-color: #{company.color_sale or 'transparent'}; color: #{company.text_color_sale or '#000'}; text-align: center;">العميل</th>
-                <th width="20%" t-attf-style="background-color: #{company.color_sale or 'transparent'}; color: #{company.text_color_sale or '#000'}; text-align: center;">تاريخ العرض</th>
-                <th width="20%" t-attf-style="background-color: #{company.color_sale or 'transparent'}; color: #{company.text_color_sale or '#000'}; text-align: center;">رقم العرض</th>
-                <th width="40%" t-attf-style="background-color: #{company.color_sale or 'transparent'}; color: #{company.text_color_sale or '#000'}; text-align: center;">نوع المنتجات والخدمات</th>
+                <th width="20%" t-attf-style="background-color: #{company.color_sale or 'transparent'}; color: #{company.text_color_sale or '#000'}; text-align: center;"><strong>العميل</strong></th>
+                <th width="20%" t-attf-style="background-color: #{company.color_sale or 'transparent'}; color: #{company.text_color_sale or '#000'}; text-align: center;"><strong>تاريخ العرض</strong></th>
+                <th width="20%" t-attf-style="background-color: #{company.color_sale or 'transparent'}; color: #{company.text_color_sale or '#000'}; text-align: center;"><strong>رقم العرض</strong></th>
+                <th width="40%" t-attf-style="background-color: #{company.color_sale or 'transparent'}; color: #{company.text_color_sale or '#000'}; text-align: center;"><strong>نوع المنتجات والخدمات</strong></th>
               </tr>
             </thead>
             <tbody class="sale_tbody">
               <tr>
-                <td><strong><span t-field="doc.partner_id"/></strong></td>
-                <td class="text-center"><strong><span t-field="doc.date_order" t-options="{'widget': 'date'}"/></strong></td>
-                <td class="text-center"><strong><span t-field="doc.name"/></strong></td>
-                <td class="text-center"><strong><span t-field="doc.service_type_id"/></strong></td>
+                <td><span t-field="doc.partner_id"/></td>
+                <td class="text-center"><span t-field="doc.date_order" t-options="{'widget': 'date'}"/></td>
+                <td class="text-center"><span t-field="doc.name"/></td>
+                <td class="text-center"><span t-field="doc.service_type_id"/></td>
               </tr>
             </tbody>
           </table>
@@ -48,12 +48,12 @@
           <table class="table table-sm table-borderless" style="direction: rtl; text-align: right;">
             <thead>
               <tr>
-                <th>الوصف</th>
-                <th class="text-center">الكمية</th>
-                <th class="text-center">السعر</th>
-                <th t-if="display_discount" class="text-center" groups="sale.group_discount_per_so_line">الخصم</th>
-                <th class="text-center">الضريبة</th>
-                <th class="text-center">الإجمالى</th>
+                <th>الوصف</strong></th>
+                <th class="text-center"><strong>الكمية</strong></th>
+                <th class="text-center"><strong>السعر</strong></th>
+                <th t-if="display_discount" class="text-center" groups="sale.group_discount_per_so_line"><strong>الخصم</strong></th>
+                <th class="text-center"><strong>الضريبة</strong></th>
+                <th class="text-center"><strong>الإجمالى</strong></th>
               </tr>
             </thead>
             <tbody>
