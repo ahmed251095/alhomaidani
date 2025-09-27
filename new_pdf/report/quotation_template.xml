@@ -1,0 +1,133 @@
+<odoo>
+  <!-- Ultra Quotation Template: inherits the original and replaces header/party blocks -->
+  <template id="report_saleorder_document_ultra"
+            inherit_id="sale.report_saleorder_document">
+            
+    <!-- Replace title header with gradient band and compact meta -->
+    <xpath expr="//div[@class='page']//h2[1]" position="replace">
+      <div class="ultra-header" t-attf-class="ultra-header {{'ultra-rtl' if o.partner_id.lang and o.partner_id.lang.startswith('ar') else ''}}">
+        <div class="ultra-left">
+          <div class="ultra-brand">
+            <img t-if="company.logo" t-att-src="'data:image/png;base64,%s' % company.logo" class="ultra-logo"/>
+            <div class="ultra-company">
+              <div class="ultra-company-name"><t t-esc="company.name"/></div>
+              <div class="ultra-company-sub">
+                <t t-esc="', '.join(filter(None, [company.street or '', company.city or '', company.country_id and company.country_id.name or '']))"/>
+              </div>
+              <div class="ultra-company-sub" t-if="company.phone or company.email">
+                <t t-esc="', '.join(filter(None, [company.phone or '', company.email or '']))"/>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="ultra-right">
+          <div class="ultra-doc-title">Quotation</div>
+          <div class="ultra-meta-row">
+            <span class="ultra-meta-k">Order #</span>
+            <span class="ultra-meta-v"><t t-esc="o.name"/></span>
+          </div>
+          <div class="ultra-meta-row">
+            <span class="ultra-meta-k">Date</span>
+            <span class="ultra-meta-v"><span t-field="o.date_order" t-options='{"date_only": True}'/></span>
+          </div>
+          <div class="ultra-meta-row" t-if="o.user_id">
+            <span class="ultra-meta-k">Salesperson</span>
+            <span class="ultra-meta-v"><t t-esc="o.user_id.name"/></span>
+          </div>
+          <div class="ultra-meta-row" t-if="o.client_order_ref">
+            <span class="ultra-meta-k">Customer Ref</span>
+            <span class="ultra-meta-v"><t t-esc="o.client_order_ref"/></span>
+          </div>
+        </div>
+      </div>
+    </xpath>
+
+    <!-- Replace the first info row (customer / quotation info) with dual panels grid -->
+    <xpath expr="//div[@class='row mt32'][1]" position="replace">
+      <div class="ultra-panels" t-attf-class="ultra-panels {{'ultra-rtl' if o.partner_id.lang and o.partner_id.lang.startswith('ar') else ''}}">
+        <div class="ultra-panel">
+          <div class="ultra-panel-title">Customer</div>
+          <div class="ultra-panel-body">
+            <div class="ultra-row"><span class="k">Name</span><span class="v"><t t-esc="o.partner_id.name"/></span></div>
+            <t t-if="o.partner_id.vat">
+              <div class="ultra-row"><span class="k">VAT</span><span class="v"><t t-esc="o.partner_id.vat"/></span></div>
+            </t>
+            <t t-if="o.partner_id.phone or o.partner_id.mobile">
+              <div class="ultra-row">
+                <span class="k">Phone</span>
+                <span class="v"><t t-esc="o.partner_id.phone or o.partner_id.mobile"/></span>
+              </div>
+            </t>
+            <t t-if="o.partner_id.email">
+              <div class="ultra-row"><span class="k">Email</span><span class="v"><t t-esc="o.partner_id.email"/></span></div>
+            </t>
+            <t t-if="o.partner_id.street or o.partner_id.city or o.partner_id.country_id">
+              <div class="ultra-row">
+                <span class="k">Address</span>
+                <span class="v">
+                  <t t-esc="', '.join(filter(None, [
+                    o.partner_id.street or '',
+                    o.partner_id.city or '',
+                    o.partner_id.country_id and o.partner_id.country_id.name or ''
+                  ]))"/>
+                </span>
+              </div>
+            </t>
+          </div>
+        </div>
+        <div class="ultra-panel">
+          <div class="ultra-panel-title">Quotation Info</div>
+          <div class="ultra-panel-body">
+            <div class="ultra-row"><span class="k">Currency</span><span class="v"><t t-esc="o.currency_id.name"/></span></div>
+            <t t-if="o.validity_date">
+              <div class="ultra-row"><span class="k">Valid Until</span><span class="v"><span t-field="o.validity_date"/></span></div>
+            </t>
+            <t t-if="o.payment_term_id">
+              <div class="ultra-row"><span class="k">Payment Terms</span><span class="v"><t t-esc="o.payment_term_id.name"/></span></div>
+            </t>
+            <t t-if="o.incoterm">
+              <div class="ultra-row"><span class="k">Incoterm</span><span class="v"><t t-esc="o.incoterm.name"/></span></div>
+            </t>
+            <t t-if="o.partner_shipping_id and o.partner_shipping_id != o.partner_id">
+              <div class="ultra-row"><span class="k">Delivery To</span><span class="v"><t t-esc="o.partner_shipping_id.name"/></span></div>
+            </t>
+          </div>
+        </div>
+      </div>
+    </xpath>
+
+    <!-- Make the lines table compact with zebra and bigger headers -->
+    <xpath expr="//table[contains(@class,'o_main_table')]" position="attributes">
+      <attribute name="class">table table-sm o_main_table ultra-lines</attribute>
+    </xpath>
+
+    <!-- Totals box: highlight total panel -->
+    <xpath expr="//table[contains(@class,'o_main_table')]/following-sibling::div[1]" position="replace">
+      <div class="ultra-totals" t-attf-class="ultra-totals {{'ultra-rtl' if o.partner_id.lang and o.partner_id.lang.startswith('ar') else ''}}">
+        <div class="ultra-sum-row">
+          <span class="k">Untaxed Amount</span>
+          <span class="v"><span t-field="o.amount_untaxed" t-options='{"widget": "monetary", "display_currency": o.currency_id}'/></span>
+        </div>
+        <div class="ultra-sum-row" t-if="o.amount_tax">
+          <span class="k">VAT Taxes</span>
+          <span class="v"><span t-field="o.amount_tax" t-options='{"widget": "monetary", "display_currency": o.currency_id}'/></span>
+        </div>
+        <div class="ultra-sum-row total">
+          <span class="k">Total</span>
+          <span class="v"><span t-field="o.amount_total" t-options='{"widget": "monetary", "display_currency": o.currency_id}'/></span>
+        </div>
+      </div>
+    </xpath>
+
+    <!-- Terms & Notes compact card -->
+    <xpath expr="//div[@id='terms' or contains(., 'Terms and conditions')][1]" position="replace">
+      <t t-if="o.note">
+        <div class="ultra-terms" t-attf-class="ultra-terms {{'ultra-rtl' if o.partner_id.lang and o.partner_id.lang.startswith('ar') else ''}}">
+          <div class="title">Terms &amp; Notes</div>
+          <div class="body"><t t-raw="o.note"/></div>
+        </div>
+      </t>
+    </xpath>
+
+  </template>
+</odoo>

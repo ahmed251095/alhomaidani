@@ -1,0 +1,46 @@
+/* Ultra Quotation – Premium look, Arabic-friendly, compact spacing */
+.ultra-rtl { direction: rtl; text-align: right; }
+.ultra-rtl .ultra-row, .ultra-rtl .ultra-meta-row { grid-template-columns: 1fr 140px; }
+.ultra-rtl .k { order: 2; text-align: left; }
+.ultra-rtl .v { order: 1; }
+
+.ultra-header{
+  display:flex; justify-content:space-between; gap:16px; align-items:center;
+  padding:14px 16px; border-radius:10px; margin-bottom:12px;
+  background: linear-gradient(135deg, #0d47a1 0%, #1976d2 45%, #42a5f5 100%);
+  color:#fff;
+}
+.ultra-brand{ display:flex; gap:12px; align-items:center; }
+.ultra-logo{ max-height:48px; border-radius:6px; background:#fff; padding:6px; }
+.ultra-company-name{ font-weight:700; font-size:16px; line-height:1.1; }
+.ultra-company-sub{ font-size:11px; opacity:.95; }
+.ultra-doc-title{ font-size:18px; font-weight:800; letter-spacing:.3px; text-transform:uppercase; text-align:right; }
+.ultra-meta-row{ display:grid; grid-template-columns: 110px 1fr; gap:8px; font-size:12px; }
+.ultra-meta-k{ opacity:.9; }
+.ultra-meta-v{ font-weight:700; }
+
+.ultra-panels{ display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-top:6px; }
+.ultra-panel{ border:1px solid #e5e7eb; border-radius:10px; overflow:hidden; }
+.ultra-panel-title{ background:#f3f6fb; padding:8px 12px; font-weight:700; font-size:12px; border-bottom:1px solid #e5e7eb; }
+.ultra-panel-body{ padding:10px 12px; display:grid; gap:6px; }
+.ultra-row{ display:grid; grid-template-columns: 120px 1fr; gap:8px; align-items:center; }
+.k{ font-size:11px; color:#374151; }
+.v{ font-size:12px; font-weight:700; color:#111827; }
+
+/* Lines table */
+.ultra-lines thead th{ background:#f3f6fb !important; font-weight:700 !important; border-bottom:1px solid #e5e7eb !important;}
+.ultra-lines tbody tr:nth-child(odd){ background:#fafbff; }
+.ultra-lines td, .ultra-lines th{ padding:6px 8px !important; }
+
+/* Totals card */
+.ultra-totals{ margin-top:10px; border:1px solid #e5e7eb; border-radius:10px; padding:10px 12px; display:grid; gap:6px; max-width:360px; margin-left:auto; }
+.ultra-totals .ultra-sum-row{ display:flex; justify-content:space-between; align-items:center; font-size:12px; }
+.ultra-totals .total{ border-top:1px dashed #cbd5e1; padding-top:6px; font-weight:800; font-size:14px; }
+
+/* Terms box */
+.ultra-terms{ margin-top:12px; border:1px dashed #cbd5e1; border-radius:10px; }
+.ultra-terms .title{ background:#f8fafc; padding:8px 12px; font-weight:700; font-size:12px; border-bottom:1px dashed #cbd5e1; }
+.ultra-terms .body{ padding:10px 12px; font-size:12px; }
+
+/* Reduce built-in report margins to remove dead space */
+.o_report_layout{ --o-report-margin-top: 10px; --o-report-margin-bottom: 10px; }
