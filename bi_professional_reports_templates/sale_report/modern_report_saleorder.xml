@@ -9,19 +9,7 @@
 
         <!-- ✅ صفحة الغلاف -->
         <t t-call="company_sale_report_cover.cover_page"/>
-        <br/><br/><br/>
-
-        <!-- ✅ إخفاء الهيدر والفوتر في أول صفحة -->
-        <style type="text/css">
-          .page:first-child .header,
-          .page:first-child .footer {
-            display: none !important;
-          }
-          .page:first-child {
-            padding: 0 !important;
-            margin: 0 !important;
-          }
-        </style>
+        <br/><br/>
 
         <!-- ✅ الصفحات التالية: التقرير العادي -->
         <div class="page" style="direction: rtl; text-align: right; font-family: 'Tahoma','Arial',sans-serif;">
