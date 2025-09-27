@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+  <data>
+    <!-- استبدال أي t-call للبلوك القديم بعرض Inline -->
+    <template id="remove_tcall_inline"
+              inherit_id="bi_professional_reports_templates.modern_report_saleorder_document">
+      <!-- لو في استدعاء باسم v1 -->
+      <xpath expr=".//t[@t-call='sale_order_extra_html_v1.sale_order_extra_html_block']" position="replace">
+        <t t-if="doc.extra_print_html">
+          <div class="oe_structure" style="margin-top:10px; page-break-inside: avoid;">
+            <t t-raw="doc.extra_print_html"/>
+          </div>
+        </t>
+      </xpath>
+      <!-- ولو في استدعاء باسم بدون v1 (احتياطي) -->
+      <xpath expr=".//t[@t-call='sale_order_extra_html.sale_order_extra_html_block']" position="replace">
+        <t t-if="doc.extra_print_html">
+          <div class="oe_structure" style="margin-top:10px; page-break-inside: avoid;">
+            <t t-raw="doc.extra_print_html"/>
+          </div>
+        </t>
+      </xpath>
+    </template>
+  </data>
+</odoo>
