@@ -42,61 +42,49 @@
                 <div class="page">
                     <div class="oe_structure"/>
 
-                    <table class="table table-sm table-borderless" style=" table-layout:fixed;">
-                        <thead>
-                            <tr>
-                                <th width="20px"
-                                    t-attf-style="background-color:#{company.color_sale}; !important; color:#{company.text_color_sale}; !important;text-align: left; ">
-                                    العميل
-                                </th>
-                                <th width="20px"
-                                    t-attf-style="background-color:#{company.color_sale}; !important; color:#{company.text_color_sale}; !important; ">
-                                    تاريخ العرض
-                                </th>
-                                <t t-if="doc.state in ['draft','sent']">
-                                    <th width="20px"
-                                        t-attf-style="background-color:#{company.color_sale}; !important; color:#{company.text_color_sale}; !important; ">
-                                        رقم العرض
-                                    </th>
-                                </t>
-                                <t t-else="">
-                                    <th width="20px"
-                                        t-attf-style="background-color:#{company.color_sale}; !important; color:#{company.text_color_sale}; !important; ">
-                                        رقم العرض
-                                    </th>
-                                </t>
-                                <th width="40px"
-                                    t-attf-style="background-color:#{company.color_sale}; !important; color:#{company.text_color_sale}; !important;text-align: right; ">
-                                    نوع المنتجات والخدمات
-                                </th>
-                            </tr>
-                        </thead>
-                        <tbody class="sale_tbody">
-                            <tr>
-                                <td>
-                                    <strong>
-                                        <span t-field="doc.partner_id"/>
-                                    </strong>
-                                </td>
-                                 <td class=" text-center">
-                                     <strong>
-                                        <span t-field="doc.date_order"/>
-                                    </strong>
-                                </td>
-                                <td class=" text-center">
-                                    <strong>
-                                        <span t-field="doc.name"/>
-                                    </strong>
-                                </td>
-                                <td t-attf-style="text-align: right;">
-                                    <strong>
-                                        <span t-field="doc.service_type_id"/>
-                                    </strong>
-                                </td>
-
-                            </tr>
-                        </tbody>
+                    <table class="table table-sm table-borderless" style="table-layout:fixed;">
+                      <thead>
+                        <tr>
+                          <th width="20px"
+                              t-attf-style="background-color: #{company.color_sale or 'transparent'} !important; color: #{company.text_color_sale or '#000'} !important; text-align: left;">
+                            العميل
+                          </th>
+                          <th width="20px"
+                              t-attf-style="background-color: #{company.color_sale or 'transparent'} !important; color: #{company.text_color_sale or '#000'} !important;">
+                            تاريخ العرض
+                          </th>
+                    
+                          <!-- مفيش داعي لـ if/else هنا لأن المحتوى واحد -->
+                          <th width="20px"
+                              t-attf-style="background-color: #{company.color_sale or 'transparent'} !important; color: #{company.text_color_sale or '#000'} !important;">
+                            رقم العرض
+                          </th>
+                    
+                          <th width="40px"
+                              t-attf-style="background-color: #{company.color_sale or 'transparent'} !important; color: #{company.text_color_sale or '#000'} !important; text-align: right;">
+                            نوع المنتجات والخدمات
+                          </th>
+                        </tr>
+                      </thead>
+                    
+                      <tbody class="sale_tbody">
+                        <tr>
+                          <td>
+                            <strong><span t-field="doc.partner_id"/></strong>
+                          </td>
+                          <td class="text-center">
+                            <strong><span t-field="doc.date_order" t-options="{'widget': 'date'}"/></strong>
+                          </td>
+                          <td class="text-center">
+                            <strong><span t-field="doc.name"/></strong>
+                          </td>
+                          <td t-attf-style="text-align: right;">
+                            <strong><span t-field="doc.service_type_id"/></strong>
+                          </td>
+                        </tr>
+                      </tbody>
                     </table>
+                    
                     <!-- Is there a discount on at least one line? -->
                     <t t-set="display_discount" t-value="any([l.discount for l in doc.order_line])"/>
 
