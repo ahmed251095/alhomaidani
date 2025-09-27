@@ -1,10 +1,9 @@
 <odoo>
-  <!-- Fully standalone report. No inherit, no XPath. -->
-  <report id="action_report_saleorder_ultra_standalone"
+  <report id="action_report_saleorder_ultra_standalone_safe"
           model="sale.order"
-          string="Quotation (Ultra Standalone)"
+          string="Quotation (Ultra Standalone Safe)"
           report_type="qweb-pdf"
-          name="sale_quotation_ultra_standalone.report_saleorder_document_ultra"
-          file="sale_quotation_ultra_standalone.report_saleorder_document_ultra"
+          name="sale_quotation_ultra_standalone_safe.report_saleorder_document_ultra"
+          file="sale_quotation_ultra_standalone_safe.report_saleorder_document_ultra"
           print_report_name="'Quotation - %s' % (object.name)"/>
 </odoo>

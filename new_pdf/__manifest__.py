@@ -1,7 +1,7 @@
 {
-  "name": "Sale Quotation Ultra (Standalone)",
-  "summary": "Final, conflict-proof standalone quotation report for Odoo 18.",
-  "version": "18.0.2.0",
+  "name": "Sale Quotation Ultra (Standalone Safe)",
+  "summary": "Final conflict-proof quotation with inline CSS (no assets).",
+  "version": "18.0.2.1",
   "category": "Sales",
   "author": "ChatGPT",
   "depends": ["sale_management"],
@@ -9,11 +9,6 @@
     "report/report_action.xml",
     "report/quotation_template.xml"
   ],
-  "assets": {
-    "web.report_assets_common": [
-      "sale_quotation_ultra_standalone/static/src/scss/ultra.scss"
-    ]
-  },
   "license": "LGPL-3",
   "installable": true
 }
