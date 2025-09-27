@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 {
     'name': 'Sale Order Extra Images',
-    'version': '1.0.0',
-    'summary': 'Add a tab on Sale Order to attach images and print them after Terms & Conditions.',
+    'version': '1.0.1',
+    'summary': 'Tab on Sale Order to add images; prints them after T&C.',
     'category': 'Sales/Reporting',
     'author': 'Custom',
     'depends': ['sale', 'bi_professional_reports_templates'],
