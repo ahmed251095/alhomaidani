@@ -7,14 +7,7 @@
 
       <!-- ✅ صفحة الغلاف: خارج external_layout = بدون هيدر/فوتر -->
       <div class="page" style="padding:0; margin:0; text-align:center; direction:rtl;">
-        <t t-if="company.sale_report_cover">
-          <img t-att-src="'/web/image/res.company/%s/sale_report_cover' % company.id"
-               style="width:100%; height:100%; object-fit:cover; display:block; margin:0;"/>
-        </t>
-        <t t-else="">
-          <img src="/company_sale_report_cover/static/src/img/default_cover.jpg"
-               style="width:100%; height:100%; object-fit:cover; display:block; margin:0;"/>
-        </t>
+        <t t-if="company.sale_report_cover"></t>
       </div>
 
       <!-- ✅ من هنا يبدأ التقرير العادي داخل الـ external_layout -->
