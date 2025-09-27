@@ -2,31 +2,36 @@
 <odoo>
   <data>
     <template id="modern_report_saleorder_document" name="Modern Sale Order">
-      <!-- اختيار الشركة بشكل آمن -->
+      <!-- شركة التقرير -->
       <t t-set="company" t-value="(doc and doc.company_id) or res_company"/>
 
-      <!-- ممكن تسيب الهيدر ده أو تعتمده على external_layout_header -->
-      <div class="header">
-        <div class="row mt32 mb32">
-          <div class="col-6">
-            <img t-if="company.logo" t-att-src="image_data_uri(company.logo)" style="max-height: 80px;"/>
-          </div>
-          <div class="col-6 text-right" style="font:16px lucida-console,sans-serif !important; text-align: right;">
-            <span t-field="company.partner_id"/><br/>
-            <span t-if="company.partner_id.street" t-field="company.partner_id.street"/><br t-if="company.partner_id.street"/>
-            <span t-if="company.partner_id.street2" t-field="company.partner_id.street2"/><br t-if="company.partner_id.street2"/>
-            <span t-if="company.partner_id.city" t-field="company.partner_id.city"/><br t-if="company.partner_id.city"/>
-            <span t-if="company.partner_id.country_id" t-field="company.partner_id.country_id"/><br t-if="company.partner_id.country_id"/>
-            <span t-if="company.partner_id.vat" t-field="company.partner_id.vat"/><br t-if="company.partner_id.vat"/>
-          </div>
-        </div>
-      </div>
-
       <t t-call="web.external_layout">
-        <!-- عرض المستند بلغة العميل -->
         <t t-set="doc" t-value="doc.with_context({'lang': doc.partner_id.lang})"/>
         <div class="page">
           <div class="oe_structure"/>
 
+          <!-- الهيدر اختياري: لو عايزه خليه فوق external_layout_header بدل هنا -->
+
           <!-- جدول بيانات عامة -->
-          <table class="table table-sm table-borderless" style="table-layout:fixed;
+          <table class="table table-sm table-borderless" style="table-layout:fixed;">
+            <thead>
+              <tr>
+                <th width="20px"
+                    t-attf-style="background-color: #{company.color_sale or 'transparent'} !important; color: #{company.text_color_sale or '#000'} !important; text-align: left;">
+                  العميل
+                </th>
+                <th width="20px"
+                    t-attf-style="background-color: #{company.color_sale or 'transparent'} !important; color: #{company.text_color_sale or '#000'} !important;">
+                  تاريخ العرض
+                </th>
+                <th width="20px"
+                    t-attf-style="background-color: #{company.color_sale or 'transparent'} !important; color: #{company.text_color_sale or '#000'} !important;">
+                  رقم العرض
+                </th>
+                <th width="40px"
+                    t-attf-style="background-color: #{company.color_sale or 'transparent'} !important; color: #{company.text_color_sale or '#000'} !important; text-align: right;">
+                  نوع المنتجات والخدمات
+                </th>
+              </tr>
+            </thead>
+            <tbody clas
