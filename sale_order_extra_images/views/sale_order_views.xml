@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
   <data>
-    <!-- Inherit Sale Order form to add tab with inline subviews (v17/18-safe) -->
+    <!-- Inherit Sale Order form to add tab with inline subviews (no active_id in context) -->
     <record id="view_order_form_inherit_extra_images" model="ir.ui.view">
       <field name="name">sale.order.form.extra.images</field>
       <field name="model">sale.order</field>
@@ -9,15 +9,14 @@
       <field name="arch" type="xml">
         <xpath expr="//notebook" position="inside">
           <page string="صور الطباعة">
-            <field name="extra_image_ids" context="{'default_sale_id': active_id}">
-              <!-- list view (use <list>, not <tree>, for Odoo 17/18) -->
+            <!-- remove context using active_id; O2M will auto-set inverse field -->
+            <field name="extra_image_ids">
               <list editable="bottom">
                 <field name="sequence" widget="handle"/>
                 <field name="name"/>
                 <field name="image_1024" widget="image" width="80" height="80"/>
                 <field name="active"/>
               </list>
-              <!-- form view -->
               <form>
                 <group>
                   <field name="sequence"/>

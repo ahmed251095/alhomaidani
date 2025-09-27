@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 {
     'name': 'Sale Order Extra Images',
-    'version': '1.0.3',
+    'version': '1.0.4',
     'summary': 'Tab on Sale Order to add images; prints them after T&C.',
     'category': 'Sales/Reporting',
     'author': 'Custom',
