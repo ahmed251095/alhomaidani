@@ -38,6 +38,7 @@
         "sale_report/fency_report_saleorder.xml",
         "sale_report/modern_report_saleorder.xml",
         "sale_report/odoo_standard_report_saleorder.xml",
+		"sale_report/inject_bi_cover.xml",
     ],
     'demo': [],
     'test': [],
