@@ -48,7 +48,7 @@
           <table class="table table-sm table-borderless" style="direction: rtl; text-align: right;">
             <thead>
               <tr>
-                <th>الوصف</strong></th>
+                <th><strong>الوصف</strong></th>
                 <th class="text-center"><strong>الكمية</strong></th>
                 <th class="text-center"><strong>السعر</strong></th>
                 <th t-if="display_discount" class="text-center" groups="sale.group_discount_per_so_line"><strong>الخصم</strong></th>
