@@ -6,6 +6,23 @@
 
       <t t-call="web.external_layout">
         <t t-set="doc" t-value="doc.with_context({'lang': doc.partner_id.lang})"/>
+
+        <!-- ✅ صفحة الغلاف -->
+        <t t-call="company_sale_report_cover.cover_page"/>
+
+        <!-- ✅ إخفاء الهيدر والفوتر في أول صفحة -->
+        <style type="text/css">
+          .page:first-child .header,
+          .page:first-child .footer {
+            display: none !important;
+          }
+          .page:first-child {
+            padding: 0 !important;
+            margin: 0 !important;
+          }
+        </style>
+
+        <!-- ✅ الصفحات التالية: التقرير العادي -->
         <div class="page" style="direction: rtl; text-align: right; font-family: 'Tahoma','Arial',sans-serif;">
           <div class="oe_structure"/>
 
@@ -13,18 +30,10 @@
           <table class="table table-sm table-borderless" style="table-layout:fixed; direction: rtl; text-align: right;">
             <thead>
               <tr>
-                <th width="20%" t-attf-style="background-color: #{company.color_sale or 'transparent'}; color: #{company.text_color_sale or '#000'}; text-align: center;">
-                  العميل
-                </th>
-                <th width="20%" t-attf-style="background-color: #{company.color_sale or 'transparent'}; color: #{company.text_color_sale or '#000'}; text-align: center;">
-                  تاريخ العرض
-                </th>
-                <th width="20%" t-attf-style="background-color: #{company.color_sale or 'transparent'}; color: #{company.text_color_sale or '#000'}; text-align: center;">
-                  رقم العرض
-                </th>
-                <th width="40%" t-attf-style="background-color: #{company.color_sale or 'transparent'}; color: #{company.text_color_sale or '#000'}; text-align: center;">
-                  نوع المنتجات والخدمات
-                </th>
+                <th width="20%" t-attf-style="background-color: #{company.color_sale or 'transparent'}; color: #{company.text_color_sale or '#000'}; text-align: center;">العميل</th>
+                <th width="20%" t-attf-style="background-color: #{company.color_sale or 'transparent'}; color: #{company.text_color_sale or '#000'}; text-align: center;">تاريخ العرض</th>
+                <th width="20%" t-attf-style="background-color: #{company.color_sale or 'transparent'}; color: #{company.text_color_sale or '#000'}; text-align: center;">رقم العرض</th>
+                <th width="40%" t-attf-style="background-color: #{company.color_sale or 'transparent'}; color: #{company.text_color_sale or '#000'}; text-align: center;">نوع المنتجات والخدمات</th>
               </tr>
             </thead>
             <tbody class="sale_tbody">
