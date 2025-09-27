@@ -112,10 +112,9 @@
                                     </strong>
                                 </td>
                                 <td t-attf-style="text-align: right;">
-                                    <t t-if="doc.partner_invoice_id.street">
-                                        <t t-esc="doc.service_type_id"/>
-                                    </t>
-                                    <br/>
+                                    <strong>
+                                        <span t-field="doc.service_type_id"/>
+                                    </strong>
                                 </td>
 
                             </tr>
