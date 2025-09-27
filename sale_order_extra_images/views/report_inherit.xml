@@ -1,25 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
   <data>
-    <!-- Block to render extra HTML -->
-    <template id="sale_order_extra_html_block">
-      <t t-if="doc.extra_print_html">
-        <div class="oe_structure" style="margin-top: 10px;">
-          <t t-raw="doc.extra_print_html"/>
-        </div>
-      </t>
-    </template>
-
     <!-- Inject into BI modern sale order template -->
     <template id="inject_html_bi" inherit_id="bi_professional_reports_templates.modern_report_saleorder_document">
-      <!-- Preferred: directly after payment terms -->
+      <!-- بعد شروط الدفع مباشرة -->
       <xpath expr="//p[span[@t-field='doc.payment_term_id']]" position="after">
-        <t t-call="sale_order_extra_html_v1.sale_order_extra_html_block"/>
+        <t t-if="doc.extra_print_html">
+          <div class="oe_structure" style="margin-top: 10px; page-break-inside: avoid;">
+            <t t-raw="doc.extra_print_html"/>
+          </div>
+        </t>
       </xpath>
-      <!-- Fallback: if there are no payment terms, inject before last oe_structure -->
+
+      <!--Fallback: لو مفيش شروط دفع، ضعه قبل آخر oe_structure -->
       <xpath expr="(//div[@class='oe_structure'])[last()]" position="before">
-        <t t-if="not doc.payment_term_id">
-          <t t-call="sale_order_extra_html_v1.sale_order_extra_html_block"/>
+        <t t-if="not doc.payment_term_id and doc.extra_print_html">
+          <div class="oe_structure" style="margin-top: 10px; page-break-inside: avoid;">
+            <t t-raw="doc.extra_print_html"/>
+          </div>
         </t>
       </xpath>
     </template>
