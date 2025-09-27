@@ -4,11 +4,13 @@ html[lang^="ar"] .ultra-panels,
 html[lang^="ar"] .ultra-meta-row,
 html[lang^="ar"] .ultra-row,
 html[lang^="ar"] .ultra-totals,
-html[lang^="ar"] .ultra-terms { direction: rtl; text-align: right; }
+html[lang^="ar"] .ultra-terms,
+html[lang^="ar"] .ultra-lines { direction: rtl; text-align: right; }
 html[lang^="ar"] .ultra-row { grid-template-columns: 1fr 140px; }
 html[lang^="ar"] .ultra-row .k { order:2; text-align:left; }
 html[lang^="ar"] .ultra-row .v { order:1; }
 
+/* Aesthetic */
 .ultra-header{
   display:flex; justify-content:space-between; gap:16px; align-items:center;
   padding:14px 16px; border-radius:10px; margin-bottom:12px;
@@ -30,12 +32,13 @@ html[lang^="ar"] .ultra-row .v { order:1; }
 .ultra-panel-body{ padding:10px 12px; display:grid; gap:6px; }
 .ultra-row{ display:grid; grid-template-columns:120px 1fr; gap:8px; align-items:center; font-size:12px; }
 
-/* Lines table */
-.ultra-lines thead th{ background:#f3f6fb !important; font-weight:700 !important; border-bottom:1px solid #e5e7eb !important;}
+/* Lines */
+.ultra-lines{ width:100%; border-collapse:collapse; margin-top:8px; }
+.ultra-lines thead th{ background:#f3f6fb; font-weight:700; border-bottom:1px solid #e5e7eb; }
 .ultra-lines tbody tr:nth-child(odd){ background:#fafbff; }
-.ultra-lines td, .ultra-lines th{ padding:6px 8px !important; }
+.ultra-lines td, .ultra-lines th{ padding:6px 8px; border-bottom:1px solid #f1f5f9; }
 
-/* Totals & terms placed after lines via natural flow, add spacing */
+/* Totals */
 .ultra-totals-wrapper{ margin-top:10px; }
 .ultra-totals{ border:1px solid #e5e7eb; border-radius:10px; padding:10px 12px; display:grid; gap:6px; max-width:360px; margin-left:auto; }
 .ultra-totals .ultra-sum-row{ display:flex; justify-content:space-between; align-items:center; font-size:12px; }
@@ -44,5 +47,5 @@ html[lang^="ar"] .ultra-row .v { order:1; }
 .ultra-terms .title{ background:#f8fafc; padding:8px 12px; font-weight:700; font-size:12px; border-bottom:1px dashed #cbd5e1; }
 .ultra-terms .body{ padding:10px 12px; font-size:12px; }
 
-/* Reduce default report margins */
+/* Tight report margins */
 .o_report_layout{ --o-report-margin-top: 10px; --o-report-margin-bottom: 10px; }
