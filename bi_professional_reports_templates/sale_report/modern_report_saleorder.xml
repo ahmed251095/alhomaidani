@@ -2,27 +2,25 @@
 <odoo>
   <data>
     <template id="modern_report_saleorder_document" name="Modern Sale Order RTL">
+      <!-- هنحدد الشركة للغلاف: لو doc موجود نستخدم شركته، وإلا نرجع لـ res_company -->
       <t t-set="company" t-value="(doc and doc.company_id) or res_company"/>
 
+      <!-- ✅ صفحة الغلاف: خارج external_layout = بدون هيدر/فوتر -->
+      <div class="page" style="padding:0; margin:0; text-align:center; direction:rtl;">
+        <t t-if="company.sale_report_cover">
+          <img t-att-src="'/web/image/res.company/%s/sale_report_cover' % company.id"
+               style="width:100%; height:100%; object-fit:cover; display:block; margin:0;"/>
+        </t>
+        <t t-else="">
+          <img src="/company_sale_report_cover/static/src/img/default_cover.jpg"
+               style="width:100%; height:100%; object-fit:cover; display:block; margin:0;"/>
+        </t>
+      </div>
+
+      <!-- ✅ من هنا يبدأ التقرير العادي داخل الـ external_layout -->
       <t t-call="web.external_layout">
         <t t-set="doc" t-value="doc.with_context({'lang': doc.partner_id.lang})"/>
 
-        <!-- ✅ صفحة الغلاف -->
-        <t t-call="company_sale_report_cover.cover_page"/>
-
-        <!-- ✅ إخفاء الهيدر والفوتر في أول صفحة -->
-        <style type="text/css">
-          .page:first-child .header,
-          .page:first-child .footer {
-            display: none !important;
-          }
-          .page:first-child {
-            padding: 0 !important;
-            margin: 0 !important;
-          }
-        </style>
-
-        <!-- ✅ الصفحات التالية: التقرير العادي -->
         <div class="page" style="direction: rtl; text-align: right; font-family: 'Tahoma','Arial',sans-serif;">
           <div class="oe_structure"/>
 
