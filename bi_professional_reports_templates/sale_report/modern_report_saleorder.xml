@@ -2,13 +2,24 @@
 <odoo>
   <data>
     <template id="modern_report_saleorder_document" name="Modern Sale Order RTL">
-      <!-- متغير الشركة -->
+      <!-- ممكن يبقى الـ doc لسه ما اتضبطش هنا في بعض التقارير، فهنشتغل مباشرةً على company -->
       <t t-set="company" t-value="(doc and doc.company_id) or res_company"/>
 
-      <!-- ✅ صفحة الغلاف مستقلة (بدون external_layout) -->
-      <t t-call="company_sale_report_cover.cover_page"/>
+      <!-- ✅ صفحة الغلاف المستقلة (بدون external_layout) -->
+      <div class="page" style="direction: rtl; text-align: center; padding:0; margin:0;">
+        <!-- لو فيه صورة غلاف على الشركة: استخدمها -->
+        <t t-if="(doc and doc.company_id and doc.company_id.sale_report_cover) or (company and company.sale_report_cover)">
+          <img t-att-src="'/web/image/res.company/%s/sale_report_cover' % ((doc.company_id.id) if (doc and doc.company_id) else company.id)"
+               style="width:100%; height:100%; object-fit: cover; display:block; margin:0;"/>
+        </t>
+        <!-- وإلا: صورة افتراضية من الموديول -->
+        <t t-else="">
+          <img src="/company_sale_report_cover/static/src/img/default_cover.jpg"
+               style="width:100%; height:100%; object-fit: cover; display:block; margin:0;"/>
+        </t>
+      </div>
 
-      <!-- ✅ من هنا يبدأ التقرير العادي داخل الـ external_layout -->
+      <!-- ✅ من هنا يبدأ التقرير العادي داخل الـ external_layout (هيظهر فيه الهيدر/الفوتر) -->
       <t t-call="web.external_layout">
         <t t-set="doc" t-value="doc.with_context({'lang': doc.partner_id.lang})"/>
 
@@ -19,18 +30,10 @@
           <table class="table table-sm table-borderless" style="table-layout:fixed; direction: rtl; text-align: right;">
             <thead>
               <tr>
-                <th width="20%" t-attf-style="background-color: #{company.color_sale or 'transparent'}; color: #{company.text_color_sale or '#000'}; text-align: center;">
-                  العميل
-                </th>
-                <th width="20%" t-attf-style="background-color: #{company.color_sale or 'transparent'}; color: #{company.text_color_sale or '#000'}; text-align: center;">
-                  تاريخ العرض
-                </th>
-                <th width="20%" t-attf-style="background-color: #{company.color_sale or 'transparent'}; color: #{company.text_color_sale or '#000'}; text-align: center;">
-                  رقم العرض
-                </th>
-                <th width="40%" t-attf-style="background-color: #{company.color_sale or 'transparent'}; color: #{company.text_color_sale or '#000'}; text-align: center;">
-                  نوع المنتجات والخدمات
-                </th>
+                <th width="20%" t-attf-style="background-color: #{company.color_sale or 'transparent'}; color: #{company.text_color_sale or '#000'}; text-align: center;">العميل</th>
+                <th width="20%" t-attf-style="background-color: #{company.color_sale or 'transparent'}; color: #{company.text_color_sale or '#000'}; text-align: center;">تاريخ العرض</th>
+                <th width="20%" t-attf-style="background-color: #{company.color_sale or 'transparent'}; color: #{company.text_color_sale or '#000'}; text-align: center;">رقم العرض</th>
+                <th width="40%" t-attf-style="background-color: #{company.color_sale or 'transparent'}; color: #{company.text_color_sale or '#000'}; text-align: center;">نوع المنتجات والخدمات</th>
               </tr>
             </thead>
             <tbody class="sale_tbody">
