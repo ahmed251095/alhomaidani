@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <!-- Header buttons (internal users only) -->
+    <record id="project_task_form_inherit_purchase_buttons" model="ir.ui.view">
+        <field name="name">project.task.form.inherit.purchase.buttons</field>
+        <field name="model">project.task</field>
+        <field name="inherit_id" ref="project.view_task_form2"/>
+        <field name="arch" type="xml">
+            <xpath expr="//header" position="inside">
+                <button
+                    type="object"
+                    name="action_open_purchase_orders"
+                    class="oe_stat_button"
+                    icon="fa-shopping-cart"
+                    groups="base.group_user"
+                    invisible="purchase_order_count == 0">
+                    <field name="purchase_order_count" widget="statinfo" string="Purchase Orders"/>
+                </button>
+                <button
+                    name="action_create_purchase_order"
+                    type="object"
+                    class="btn-primary"
+                    string="Create Purchase Order"
+                    icon="fa-plus"
+                    groups="base.group_user"/>
+            </xpath>
+        </field>
+    </record>
+
+    <!-- Dedicated tab to list related POs (internal users only) -->
+    <record id="project_task_form_inherit_purchase_tab" model="ir.ui.view">
+        <field name="name">project.task.form.inherit.purchase.tab</field>
+        <field name="model">project.task</field>
+        <field name="inherit_id" ref="project.view_task_form2"/>
+        <field name="arch" type="xml">
+            <xpath expr="//notebook" position="inside">
+                <page string="Purchase Orders" groups="base.group_user">
+                    <field name="purchase_order_ids"/>
+                </page>
+            </xpath>
+        </field>
+    </record>
+</odoo>
