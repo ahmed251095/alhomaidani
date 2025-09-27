@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+  <data>
+    <template id="sale_order_extra_images_block">
+      <t t-if="doc.extra_image_ids">
+        <div style="margin-top: 12px;">
+          <t t-foreach="doc.extra_image_ids.sorted(key=lambda r: r.sequence)" t-as="imgl">
+            <div style="page-break-inside: avoid; margin-top: 8px;">
+              <img t-att-src="'/web/image/sale.order.image/%s/image_1920' % imgl.id"
+                   style="width:100%; height:auto; display:block;"/>
+              <div t-if="imgl.name" style="text-align:center; font-size:12px; opacity:.75; margin-top:4px;">
+                <span t-esc="imgl.name"/>
+              </div>
+            </div>
+          </t>
+        </div>
+      </t>
+    </template>
+
+    <template id="inject_images_bi"
+              inherit_id="bi_professional_reports_templates.modern_report_saleorder_document">
+      <xpath expr="(//div[@class='oe_structure'])[last()]" position="before">
+        <t t-call="sale_order_extra_images.sale_order_extra_images_block"/>
+      </xpath>
+    </template>
+  </data>
+</odoo>

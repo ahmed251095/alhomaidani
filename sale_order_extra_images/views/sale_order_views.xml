@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+  <data>
+    <record id="view_order_form_inherit_extra_images" model="ir.ui.view">
+      <field name="name">sale.order.form.extra.images</field>
+      <field name="model">sale.order</field>
+      <field name="inherit_id" ref="sale.view_order_form"/>
+      <field name="arch" type="xml">
+        <xpath expr="//notebook" position="inside">
+          <page string="صور الطباعة">
+            <field name="extra_image_ids" context="{'default_sale_id': active_id}" widget="one2many_list">
+              <tree editable="bottom">
+                <field name="sequence" widget="handle"/>
+                <field name="name"/>
+                <field name="image_1024" widget="image" width="80" height="80"/>
+                <field name="active"/>
+              </tree>
+              <form>
+                <group>
+                  <field name="sequence"/>
+                  <field name="name"/>
+                  <field name="image_1920" widget="image" class="oe_avatar"/>
+                  <field name="active"/>
+                </group>
+              </form>
+            </field>
+          </page>
+        </xpath>
+      </field>
+    </record>
+  </data>
+</odoo>
