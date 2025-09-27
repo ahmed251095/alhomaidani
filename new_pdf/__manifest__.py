@@ -1,7 +1,7 @@
 {
     "name": "Sale Quotation Ultra",
-    "summary": "Premium quotation print for Odoo 18 – safer XPaths (insert-only), Arabic-friendly, zero dead space.",
-    "version": "18.0.1.1",
+    "summary": "Premium quotation for Odoo 18 – robust xpaths, no 'o' in attrs, RTL via :lang(ar).",
+    "version": "18.0.1.2",
     "category": "Sales",
     "author": "ChatGPT",
     "depends": ["sale_management"],

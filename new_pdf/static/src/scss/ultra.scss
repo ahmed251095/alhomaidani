@@ -1,12 +1,13 @@
-/* Safer: also hide default title/info when present (CSS-based) */
-.page h2:first-of-type{ display:none !important; }
-.page .row.mt32:first-of-type{ display:none !important; }
-
-/* Ultra styles (same as v1 with small tweaks) */
-.ultra-rtl{ direction:rtl; text-align:right; }
-.ultra-rtl .ultra-row, .ultra-rtl .ultra-meta-row{ grid-template-columns: 1fr 140px; }
-.ultra-rtl .k{ order:2; text-align:left; }
-.ultra-rtl .v{ order:1; }
+/* RTL via document language */
+html[lang^="ar"] .ultra-header,
+html[lang^="ar"] .ultra-panels,
+html[lang^="ar"] .ultra-meta-row,
+html[lang^="ar"] .ultra-row,
+html[lang^="ar"] .ultra-totals,
+html[lang^="ar"] .ultra-terms { direction: rtl; text-align: right; }
+html[lang^="ar"] .ultra-row { grid-template-columns: 1fr 140px; }
+html[lang^="ar"] .ultra-row .k { order:2; text-align:left; }
+html[lang^="ar"] .ultra-row .v { order:1; }
 
 .ultra-header{
   display:flex; justify-content:space-between; gap:16px; align-items:center;
@@ -29,14 +30,16 @@
 .ultra-panel-body{ padding:10px 12px; display:grid; gap:6px; }
 .ultra-row{ display:grid; grid-template-columns:120px 1fr; gap:8px; align-items:center; font-size:12px; }
 
+/* Lines table */
 .ultra-lines thead th{ background:#f3f6fb !important; font-weight:700 !important; border-bottom:1px solid #e5e7eb !important;}
 .ultra-lines tbody tr:nth-child(odd){ background:#fafbff; }
 .ultra-lines td, .ultra-lines th{ padding:6px 8px !important; }
 
-.ultra-totals{ margin-top:10px; border:1px solid #e5e7eb; border-radius:10px; padding:10px 12px; display:grid; gap:6px; max-width:360px; margin-left:auto; }
+/* Totals & terms placed after lines via natural flow, add spacing */
+.ultra-totals-wrapper{ margin-top:10px; }
+.ultra-totals{ border:1px solid #e5e7eb; border-radius:10px; padding:10px 12px; display:grid; gap:6px; max-width:360px; margin-left:auto; }
 .ultra-totals .ultra-sum-row{ display:flex; justify-content:space-between; align-items:center; font-size:12px; }
 .ultra-totals .total{ border-top:1px dashed #cbd5e1; padding-top:6px; font-weight:800; font-size:14px; }
-
 .ultra-terms{ margin-top:12px; border:1px dashed #cbd5e1; border-radius:10px; }
 .ultra-terms .title{ background:#f8fafc; padding:8px 12px; font-weight:700; font-size:12px; border-bottom:1px dashed #cbd5e1; }
 .ultra-terms .body{ padding:10px 12px; font-size:12px; }

@@ -1,9 +1,10 @@
 <odoo>
   <template id="report_saleorder_document_ultra" inherit_id="sale.report_saleorder_document">
     
-    <!-- Insert our custom header at the very top of the first page -->
+    <!-- Add everything INSIDE the .page so 'o' is in scope -->
     <xpath expr="//div[contains(@class,'page')]" position="inside">
-      <div class="ultra-header" t-attf-class="ultra-header {{'ultra-rtl' if o.partner_id.lang and o.partner_id.lang.startswith('ar') else ''}}">
+      <!-- ULTRA HEADER -->
+      <div class="ultra-header">
         <div class="ultra-left">
           <div class="ultra-brand">
             <img t-if="company.logo" t-att-src="'data:image/png;base64,%s' % company.logo" class="ultra-logo"/>
@@ -31,24 +32,19 @@
         </div>
       </div>
 
-      <!-- Our compact customer/quotation info panels -->
-      <div class="ultra-panels" t-attf-class="ultra-panels {{'ultra-rtl' if o.partner_id.lang and o.partner_id.lang.startswith('ar') else ''}}">
+      <!-- PANELS -->
+      <div class="ultra-panels">
         <div class="ultra-panel">
           <div class="ultra-panel-title">Customer</div>
           <div class="ultra-panel-body">
             <div class="ultra-row"><span class="k">Name</span><span class="v"><t t-esc="o.partner_id.name"/></span></div>
             <t t-if="o.partner_id.vat"><div class="ultra-row"><span class="k">VAT</span><span class="v"><t t-esc="o.partner_id.vat"/></span></div></t>
-            <t t-if="o.partner_id.phone or o.partner_id.mobile">
-              <div class="ultra-row"><span class="k">Phone</span><span class="v"><t t-esc="o.partner_id.phone or o.partner_id.mobile"/></span></div>
-            </t>
+            <t t-if="o.partner_id.phone or o.partner_id.mobile"><div class="ultra-row"><span class="k">Phone</span><span class="v"><t t-esc="o.partner_id.phone or o.partner_id.mobile"/></span></div></t>
             <t t-if="o.partner_id.email"><div class="ultra-row"><span class="k">Email</span><span class="v"><t t-esc="o.partner_id.email"/></span></div></t>
             <t t-if="o.partner_id.street or o.partner_id.city or o.partner_id.country_id">
-              <div class="ultra-row">
-                <span class="k">Address</span>
-                <span class="v">
-                  <t t-esc="', '.join(filter(None, [o.partner_id.street or '', o.partner_id.city or '', o.partner_id.country_id and o.partner_id.country_id.name or '']))"/>
-                </span>
-              </div>
+              <div class="ultra-row"><span class="k">Address</span><span class="v">
+                <t t-esc="', '.join(filter(None, [o.partner_id.street or '', o.partner_id.city or '', o.partner_id.country_id and o.partner_id.country_id.name or '']))"/>
+              </span></div>
             </t>
           </div>
         </div>
@@ -63,30 +59,34 @@
           </div>
         </div>
       </div>
-    </xpath>
 
-    <!-- Make the lines table compact -->
-    <xpath expr="//table[contains(@class,'o_main_table')]" position="attributes">
-      <attribute name="class">table table-sm o_main_table ultra-lines</attribute>
-    </xpath>
-
-    <!-- Replace totals area reliably by appending our own after the table -->
-    <xpath expr="//table[contains(@class,'o_main_table')]" position="after">
-      <div class="ultra-totals" t-attf-class="ultra-totals {{'ultra-rtl' if o.partner_id.lang and o.partner_id.lang.startswith('ar') else ''}}">
-        <div class="ultra-sum-row"><span class="k">Untaxed Amount</span><span class="v"><span t-field="o.amount_untaxed" t-options='{"widget": "monetary", "display_currency": o.currency_id}'/></span></div>
-        <t t-if="o.amount_tax"><div class="ultra-sum-row"><span class="k">VAT Taxes</span><span class="v"><span t-field="o.amount_tax" t-options='{"widget": "monetary", "display_currency": o.currency_id}'/></span></div></t>
-        <div class="ultra-sum-row total"><span class="k">Total</span><span class="v"><span t-field="o.amount_total" t-options='{"widget": "monetary", "display_currency": o.currency_id}'/></span></div>
+      <!-- TOTALS + TERMS INSIDE THE PAGE, BELOW THE TABLE VIA CSS MARGINS -->
+      <div class="ultra-totals-wrapper">
+        <div class="ultra-totals">
+          <div class="ultra-sum-row"><span class="k">Untaxed Amount</span><span class="v"><span t-field="o.amount_untaxed" t-options='{"widget":"monetary","display_currency": o.currency_id}'/></span></div>
+          <t t-if="o.amount_tax"><div class="ultra-sum-row"><span class="k">VAT Taxes</span><span class="v"><span t-field="o.amount_tax" t-options='{"widget":"monetary","display_currency": o.currency_id}'/></span></div></t>
+          <div class="ultra-sum-row total"><span class="k">Total</span><span class="v"><span t-field="o.amount_total" t-options='{"widget":"monetary","display_currency": o.currency_id}'/></span></div>
+        </div>
+        <t t-if="o.note">
+          <div class="ultra-terms">
+            <div class="title">Terms &amp; Notes</div>
+            <div class="body"><t t-raw="o.note"/></div>
+          </div>
+        </t>
       </div>
     </xpath>
 
-    <!-- Add terms card after totals if note exists -->
-    <xpath expr="//table[contains(@class,'o_main_table')]" position="after">
-      <t t-if="o.note">
-        <div class="ultra-terms" t-attf-class="ultra-terms {{'ultra-rtl' if o.partner_id.lang and o.partner_id.lang.startswith('ar') else ''}}">
-          <div class="title">Terms &amp; Notes</div>
-          <div class="body"><t t-raw="o.note"/></div>
-        </div>
-      </t>
+    <!-- Hide default title & first info row safely -->
+    <xpath expr="//div[contains(@class,'page')]" position="inside">
+      <style>
+        .page h2:first-of-type{ display:none !important; }
+        .page .row.mt32:first-of-type{ display:none !important; }
+      </style>
+    </xpath>
+
+    <!-- Make the standard lines table compact -->
+    <xpath expr="//table[contains(@class,'o_main_table')]" position="attributes">
+      <attribute name="class">table table-sm o_main_table ultra-lines</attribute>
     </xpath>
 
   </template>
