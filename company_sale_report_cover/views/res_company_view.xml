@@ -12,7 +12,7 @@
               <field name="sale_report_cover" widget="image" class="oe_avatar" filename="sale_report_cover_filename"/>
               <field name="sale_report_cover_fit"/>
             </group>
-            <label string="This image is intended to be used as a first-page cover in QWeb reports. Include the provided template snippet in your report to render it."/>
+            <div class="o_form_label">This image is intended to be used as a first-page cover in QWeb reports. Include the provided template snippet in your report to render it.</div>
           </page>
         </xpath>
       </field>
