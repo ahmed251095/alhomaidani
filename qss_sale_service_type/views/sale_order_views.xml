@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_order_form_inherit_service_type" model="ir.ui.view">
+        <field name="name">sale.order.form.inherit.service.type</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_form"/>
+        <field name="arch" type="xml">
+            <!-- Place after customer field to avoid missing-named group crashes across versions -->
+            <xpath expr="//field[@name='partner_id']" position="after">
+                <field name="service_type_id"
+                       string="نوع المنتجات والخدمات"
+                       placeholder="اختر نوع المنتجات والخدمات"
+                       options="{'no_create_edit': False}"
+                       domain="['|', ('company_id', '=', False), ('company_id', '=', company_id)]"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>
