@@ -1,1 +1,1 @@
-from . import sale_order_image
+from . import sale_order

@@ -1,31 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
   <data>
-    <!-- Inherit Sale Order form to add tab with inline subviews (no active_id in context) -->
-    <record id="view_order_form_inherit_extra_images" model="ir.ui.view">
-      <field name="name">sale.order.form.extra.images</field>
+    <record id="view_order_form_inherit_extra_html" model="ir.ui.view">
+      <field name="name">sale.order.form.extra.html</field>
       <field name="model">sale.order</field>
       <field name="inherit_id" ref="sale.view_order_form"/>
       <field name="arch" type="xml">
         <xpath expr="//notebook" position="inside">
-          <page string="صور الطباعة">
-            <!-- remove context using active_id; O2M will auto-set inverse field -->
-            <field name="extra_image_ids">
-              <list editable="bottom">
-                <field name="sequence" widget="handle"/>
-                <field name="name"/>
-                <field name="image_1024" widget="image" width="80" height="80"/>
-                <field name="active"/>
-              </list>
-              <form>
-                <group>
-                  <field name="sequence"/>
-                  <field name="name"/>
-                  <field name="image_1920" widget="image" class="oe_avatar"/>
-                  <field name="active"/>
-                </group>
-              </form>
-            </field>
+          <page string="نص إضافي للطباعة">
+            <field name="extra_print_html" widget="html"
+                   options="{'sanitize': False, 'style-inline': True}"
+                   placeholder="اكتب هنا أي محتوى HTML تريد طباعته بعد الشروط..."/>
           </page>
         </xpath>
       </field>
