@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+  <data>
+    <record id="view_company_form_inherit_extra_html_default" model="ir.ui.view">
+      <field name="name">res.company.form.extra.html.default</field>
+      <field name="model">res.company</field>
+      <field name="inherit_id" ref="base.view_company_form"/>
+      <field name="arch" type="xml">
+        <xpath expr="//sheet" position="inside">
+          <group string="Sales / Quotation">
+            <field name="default_extra_print_html" widget="html"
+                   placeholder="النص الافتراضي للعرض"/>
+          </group>
+        </xpath>
+      </field>
+    </record>
+  </data>
+</odoo>
