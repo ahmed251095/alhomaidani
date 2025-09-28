@@ -2,30 +2,33 @@
 <odoo>
   <data>
     <template id="modern_report_saleorder_document" name="Modern Sale Order RTL">
+      <!-- الشركة -->
       <t t-set="company" t-value="(doc and doc.company_id) or res_company"/>
 
+      <!-- إطار التقرير القياسي -->
       <t t-call="web.external_layout">
+        <!-- توحيد اللغة حسب لغة الشريك -->
         <t t-set="doc" t-value="doc.with_context({'lang': doc.partner_id.lang})"/>
-        <div style="direction: rtl; text-align: right; font-family: 'Times New Roman', Times, serif;">
-            <t t-call="sale.report_saleorder_document"/>
-        </div>
-      </t>
 
-        <!-- ✅ الصفحات التالية: التقرير العادي -->
-        <div class="page" style="direction: rtl; text-align: right;font-family: 'Times New Roman', Times, serif;">
+        <!-- كل صفحة التقرير داخل div.page -->
+        <div class="page" style="direction: rtl; text-align: right; font-family: 'Times New Roman', Times, serif;">
+
           <div class="oe_structure"/>
-          
+
+          <!-- الغلاف -->
           <div style="margin: 0 0 12px 0;">
-              <t t-if="doc.company_id.sale_report_cover">
-                <img t-att-src="'/web/image/res.company/%s/sale_report_cover' % doc.company_id.id"
-                     style="width:100%; height:auto; display:block;"/>
-              </t>
-              <t t-else="">
-                <img src="/company_sale_report_cover/static/src/img/default_cover.jpg"
-                     style="width:100%; height:auto; display:block;"/>
-              </t>
+            <t t-if="doc.company_id.sale_report_cover">
+              <img t-att-src="'/web/image/res.company/%s/sale_report_cover' % doc.company_id.id"
+                   style="width:100%; height:auto; display:block;"/>
+            </t>
+            <t t-else="">
+              <img src="/company_sale_report_cover/static/src/img/default_cover.jpg"
+                   style="width:100%; height:auto; display:block;"/>
+            </t>
           </div>
+
           <br/><br/><br/><br/><br/><br/><br/><br/>
+
           <!-- جدول بيانات عامة -->
           <table class="table table-sm table-borderless" style="table-layout:fixed; direction: rtl; text-align: right;">
             <thead>
@@ -45,8 +48,8 @@
               </tr>
             </tbody>
           </table>
+
           <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
-          
 
           <!-- هل يوجد خصم -->
           <t t-set="display_discount" t-value="any([l.discount for l in doc.order_line])"/>
@@ -116,10 +119,10 @@
               </div>
             </t>
           </div>
-       
+
           <div class="oe_structure"/>
-        </div>
-      </t>
+        </div> <!-- /page -->
+      </t> <!-- /web.external_layout -->
     </template>
   </data>
 </odoo>
