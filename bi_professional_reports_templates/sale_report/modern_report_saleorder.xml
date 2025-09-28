@@ -5,7 +5,11 @@
       <t t-set="company" t-value="(doc and doc.company_id) or res_company"/>
 
       <t t-call="web.external_layout">
-        <t t-set="doc" t-value="doc.with_context({'lang': doc.partner_id.lang}) style="direction: rtl; text-align: right;font-family: 'Times New Roman', Times, serif;"/>
+        <t t-set="doc" t-value="doc.with_context({'lang': doc.partner_id.lang})"/>
+        <div style="direction: rtl; text-align: right; font-family: 'Times New Roman', Times, serif;">
+            <t t-call="sale.report_saleorder_document"/>
+        </div>
+      </t>
 
         <!-- ✅ الصفحات التالية: التقرير العادي -->
         <div class="page" style="direction: rtl; text-align: right;font-family: 'Times New Roman', Times, serif;">
