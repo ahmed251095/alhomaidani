@@ -27,7 +27,7 @@
             </t>
           </div>
 
-          <br/><br/><br/><br/><br/><br/><br/><br/>
+          <br/><br/>
 
           <!-- جدول بيانات عامة -->
           <table class="table table-sm table-borderless" style="table-layout:fixed; direction: rtl; text-align: right;">
@@ -49,7 +49,6 @@
             </tbody>
           </table>
 
-          <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
 
           <!-- هل يوجد خصم -->
           <t t-set="display_discount" t-value="any([l.discount for l in doc.order_line])"/>
