@@ -83,12 +83,12 @@
           <table class="table table-sm table-borderless" style="direction: rtl; text-align: right;">
             <thead>
               <tr>
-                <th t-attf-style="background-color: #{company.color_sale or 'transparent'}; color: #{company.text_color_sale or '#000'}; class="text-center" ><strong>الوصف</strong></th>
-                <th t-attf-style="background-color: #{company.color_sale or 'transparent'}; color: #{company.text_color_sale or '#000'}; class="text-center"><strong>الكمية</strong></th>
-                <th t-attf-style="background-color: #{company.color_sale or 'transparent'}; color: #{company.text_color_sale or '#000'}; class="text-center"><strong>السعر</strong></th>
-                <th t-if="display_discount" t-attf-style="background-color: #{company.color_sale or 'transparent'}; color: #{company.text_color_sale or '#000'}; class="text-center" groups="sale.group_discount_per_so_line"><strong>الخصم</strong></th>
-                <th t-attf-style="background-color: #{company.color_sale or 'transparent'}; color: #{company.text_color_sale or '#000'}; class="text-center"><strong>الضريبة</strong></th>
-                <th t-attf-style="background-color: #{company.color_sale or 'transparent'}; color: #{company.text_color_sale or '#000'}; class="text-center"><strong>الإجمالى</strong></th>
+                <th t-attf-style="background-color: #{company.color_sale or 'transparent'}; color: #{company.text_color_sale or '#000'}; text-align: center;" ><strong>الوصف</strong></th>
+                <th t-attf-style="background-color: #{company.color_sale or 'transparent'}; color: #{company.text_color_sale or '#000'}; text-align: center;"><strong>الكمية</strong></th>
+                <th t-attf-style="background-color: #{company.color_sale or 'transparent'}; color: #{company.text_color_sale or '#000'}; text-align: center;"><strong>السعر</strong></th>
+                <th t-if="display_discount" t-attf-style="background-color: #{company.color_sale or 'transparent'}; color: #{company.text_color_sale or '#000'}; text-align: center;" groups="sale.group_discount_per_so_line"><strong>الخصم</strong></th>
+                <th t-attf-style="background-color: #{company.color_sale or 'transparent'}; color: #{company.text_color_sale or '#000'}; text-align: center;"><strong>الضريبة</strong></th>
+                <th t-attf-style="background-color: #{company.color_sale or 'transparent'}; color: #{company.text_color_sale or '#000'}; text-align: center;"><strong>الإجمالى</strong></th>
               </tr>
             </thead>
             <tbody>
