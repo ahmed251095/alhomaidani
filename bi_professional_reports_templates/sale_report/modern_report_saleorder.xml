@@ -114,15 +114,15 @@
           <div name="total" class="float-start" style="direction: rtl; text-align: right; width: 350px;">
             <table class="table table-condensed table-borderless">
               <tr class="border-black">
-                <td t-attf-style="background-color: #{company.color_sale or 'transparent'}; color: #{company.text_color_sale or '#000'}><strong>الإجمالى قبل الضريبة</strong></td>
+                <td t-attf-style="background-color: #{company.color_sale or 'transparent'}; color: #{company.text_color_sale or '#000'};"><strong>الإجمالى قبل الضريبة</strong></td>
                 <td class="text-center"><span t-field="doc.amount_untaxed"/></td>
               </tr>
               <tr>
-                <td t-attf-style="background-color: #{company.color_sale or 'transparent'}; color: #{company.text_color_sale or '#000'}>الضريبة</td>
+                <td t-attf-style="background-color: #{company.color_sale or 'transparent'}; color: #{company.text_color_sale or '#000'};">الضريبة</td>
                 <td class="text-center"><span t-field="doc.amount_tax"/></td>
               </tr>
               <tr class="border-black">
-                <td t-attf-style="background-color: #{company.color_sale or 'transparent'}; color: #{company.text_color_sale or '#000'}><strong>الإجمالى بعد الضريبة</strong></td>
+                <td t-attf-style="background-color: #{company.color_sale or 'transparent'}; color: #{company.text_color_sale or '#000'};"><strong>الإجمالى بعد الضريبة</strong></td>
                 <td class="text-center"><span t-field="doc.amount_total"/></td>
               </tr>
             </table>
