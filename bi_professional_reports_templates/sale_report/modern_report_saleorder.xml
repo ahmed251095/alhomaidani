@@ -30,14 +30,14 @@
           <table class="table table-sm table-borderless" style="table-layout:fixed; direction: rtl; text-align: right;">
             <thead>
               <tr>
-                <th width="20%" t-attf-style="background-color: #{company.color_sale or 'transparent'}; color: #{company.text_color_sale or '#000'}; text-align: center;"><strong>العميل</strong></th>
-                <th width="20%" t-attf-style="background-color: #{company.color_sale or 'transparent'}; color: #{company.text_color_sale or '#000'}; text-align: center;"><strong>تاريخ العرض</strong></th>
+                <th width="30%" t-attf-style="background-color: #{company.color_sale or 'transparent'}; color: #{company.text_color_sale or '#000'}; text-align: center;"><strong>العميل</strong></th>
+                <th width="15%" t-attf-style="background-color: #{company.color_sale or 'transparent'}; color: #{company.text_color_sale or '#000'}; text-align: center;"><strong>تاريخ العرض</strong></th>
                 <th width="20%" t-attf-style="background-color: #{company.color_sale or 'transparent'}; color: #{company.text_color_sale or '#000'}; text-align: center;"><strong>رقم العرض</strong></th>
                 <th width="40%" t-attf-style="background-color: #{company.color_sale or 'transparent'}; color: #{company.text_color_sale or '#000'}; text-align: center;"><strong>نوع المنتجات والخدمات</strong></th>
               </tr>
             </thead>
             <tbody class="sale_tbody">
-              <tr>
+              <tr class="text-center">
                 <td><span t-field="doc.partner_id"/></td>
                 <td class="text-center"><span t-field="doc.date_order" t-options="{'widget': 'date'}"/></td>
                 <td class="text-center"><span t-field="doc.name"/></td>
