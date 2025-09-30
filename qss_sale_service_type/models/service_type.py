@@ -16,4 +16,4 @@ class SaleProductServiceType(models.Model):
         help="Leave empty to make it available to all companies."
     )
     active = fields.Boolean(default=True)
-    note = fields.Text()
+    note = fields.Html()
