@@ -9,3 +9,23 @@ class SaleOrder(models.Model):
         sanitize=False,
         help="Rich text (HTML) that will be printed after Terms & Conditions."
     )
+
+
+
+@api.onchange('service_type_id')
+    def _onchange_service_type_id_set_extra_html(self):
+        for order in self:
+            order.extra_print_html = order.service_type_id.note or False
+
+    @api.model
+    def create(self, vals):
+        if not vals.get('extra_print_html') and vals.get('service_type_id'):
+            st = self.env['sale.product.service.type'].browse(vals['service_type_id'])
+            vals['extra_print_html'] = st.note or False
+        return super().create(vals)
+
+    def write(self, vals):
+        if 'service_type_id' in vals and 'extra_print_html' not in vals:
+            st = self.env['sale.product.service.type'].browse(vals['service_type_id'])
+            vals['extra_print_html'] = (st.note or False)
+        return super().write(vals)
