@@ -23,6 +23,11 @@ class SaleOrder(models.Model):
         help="Rich text (HTML) that will be printed after Terms & Conditions."
     )
 
+    note = fields.Html(
+        string="Terms & Conditions",
+        sanitize=False,
+    )
+
     @api.onchange('service_type_id')
     def _onchange_service_type_id_set_extra_html(self):
         """انسخ الملاحظة من نوع الخدمة عند تغييره في الفورم.
