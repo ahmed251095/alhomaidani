@@ -92,18 +92,48 @@
               </tr>
             </thead>
             <tbody>
+              <!-- عدد الأعمدة: لو فيه خصم = 6، لو مفيش = 5 -->
+              <t t-set="colspan" t-value="6 if display_discount else 5"/>
+            
               <t t-foreach="doc.order_line" t-as="l">
-                <tr t-if="l.product_uom_qty">
-                  <td><span t-field="l.name"/></td>
-                  <td class="text-center">
-                    <span t-field="l.product_uom_qty"/>
-                    <span groups="product.group_uom" t-field="l.product_uom"/>
-                  </td>
-                  <td class="text-center"><span t-field="l.price_unit"/></td>
-                  <td t-if="display_discount" class="text-center" groups="sale.group_discount_per_so_line"><span t-field="l.discount"/></td>
-                  <td class="text-center"><span t-esc="', '.join([(t.description or t.name) for t in l.tax_id])"/></td>
-                  <td class="text-center"><span t-field="l.price_subtotal"/></td>
-                </tr>
+            
+                <!-- سطر Section -->
+                <t t-if="l.display_type == 'line_section'">
+                  <tr class="o_section">
+                    <td t-att-colspan="colspan" style="font-weight:bold; background:#f0f0f0; text-align:right;">
+                      <span t-field="l.name"/>
+                    </td>
+                  </tr>
+                </t>
+            
+                <!-- سطر Note -->
+                <t t-elif="l.display_type == 'line_note'">
+                  <tr class="o_note">
+                    <td t-att-colspan="colspan" style="text-align:right;">
+                      <em t-field="l.name"/>
+                    </td>
+                  </tr>
+                </t>
+            
+                <!-- سطر منتج عادي -->
+                <t t-else="">
+                  <tr>
+                    <td><span t-field="l.name"/></td>
+                    <td class="text-center">
+                      <span t-field="l.product_uom_qty"/>
+                      <span groups="product.group_uom" t-field="l.product_uom"/>
+                    </td>
+                    <td class="text-center"><span t-field="l.price_unit"/></td>
+                    <td t-if="display_discount" class="text-center" groups="sale.group_discount_per_so_line">
+                      <span t-field="l.discount"/>
+                    </td>
+                    <td class="text-center">
+                      <span t-esc="', '.join([(t.description or t.name) for t in l.tax_id])"/>
+                    </td>
+                    <td class="text-center"><span t-field="l.price_subtotal"/></td>
+                  </tr>
+                </t>
+            
               </t>
             </tbody>
           </table>
