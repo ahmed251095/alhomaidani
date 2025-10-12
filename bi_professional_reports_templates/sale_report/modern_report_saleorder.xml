@@ -148,7 +148,7 @@
             </table>
           </div>
 
-          <!-- <div style="direction: rtl; text-align: right;">
+          <div style="direction: rtl; text-align: right;">
             <p t-if="doc.note">
               <strong>ملاحظات: </strong>
               <span t-field="doc.note"/>
@@ -161,7 +161,7 @@
               <strong>هذا العرض سارى حتى: </strong>
               <span t-field="doc.validity_date"/>
             </p>
-          </div> -->
+          </div>
 
           <div class="oe_structure"/>
         </div> 
