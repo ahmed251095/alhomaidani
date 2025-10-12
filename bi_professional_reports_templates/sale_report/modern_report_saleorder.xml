@@ -179,7 +179,7 @@
             </t> -->
           </div>
 
-          <div class="oe_structure"/>
+          <!-- <div class="oe_structure"/> -->
         </div> <!-- /page -->
       </t> <!-- /web.external_layout -->
     </template>
